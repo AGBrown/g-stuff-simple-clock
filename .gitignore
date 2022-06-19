@@ -348,7 +348,9 @@ MigrationBackup/
 
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+
+# npx create-react-app g-stuff-simple-clock --template typescript
 
 # dependencies
 /node_modules
