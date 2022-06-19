@@ -2,11 +2,17 @@ import React from 'react';
 import './App.css';
 
 interface IClockFaceProps {
-
+  date: Date
 }
 
 function ClockFace(props: IClockFaceProps) {
   var hands = ["second", "min", "hour"];
+  // format date as MMM dd
+  var displayDate = props.date.toLocaleDateString("en-US", {
+    month: "short",
+    day: "numeric"
+  });
+
   return (
     <div className="clock">
     <div className="clock-face">
@@ -18,7 +24,7 @@ function ClockFace(props: IClockFaceProps) {
         )}
       </div>
       <div className="date-container">
-        <p className="date">JUL 31</p>
+        <p className="date">{displayDate}</p>
       </div>
 
       {[hands.map(x =>
