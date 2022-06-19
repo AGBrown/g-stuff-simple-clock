@@ -2,8 +2,11 @@ import React from 'react';
 import { render, screen } from '@testing-library/react';
 import ClockFace from './ClockFace';
 
+const handsConfig = { jump: { min: true, hour: true } };
+
 test('renders minute marks', () => {
   const props = {
+    handsConfig,
     date: new Date(Date.now()),
     expandTicks: false
   };
@@ -16,6 +19,7 @@ test('renders minute marks', () => {
 
 test('renders hand faces', () => {
   const props = {
+    handsConfig,
     date: new Date(Date.now()),
     expandTicks: false
   };
@@ -28,6 +32,7 @@ test('renders hand faces', () => {
 
 test('renders hands', () => {
   const props = {
+    handsConfig,
     date: new Date(Date.now()),
     expandTicks: false
   };
@@ -47,6 +52,7 @@ test('renders the date', () => {
   });
 
   const props = {
+    handsConfig,
     date,
     expandTicks: false
   };

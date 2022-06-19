@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './App.css';
 import ButtonsIncrements from './ButtonsIncrements';
 import ClockFace from './ClockFace';
@@ -6,6 +6,13 @@ import ClockFace from './ClockFace';
 function App(props: { msg: string }) {
   const [date, _] = useState(new Date(Date.now()));
   const [expandTicks, setExpandTicks] = useState(false);
+
+  const handsConfig = {
+    jump: {
+      min: false,
+      hour: false
+    }
+  };
 
   useEffect(() => {
     setTimeout(() => {
@@ -19,7 +26,7 @@ function App(props: { msg: string }) {
           {props.msg}
       </header>
       <ButtonsIncrements />
-      <ClockFace { ...{ date, expandTicks } } />
+      <ClockFace { ...{ handsConfig, date, expandTicks } } />
     </div>
   );
 }

@@ -1,18 +1,20 @@
 import React from 'react';
 import './App.css';
 
-interface IClockFaceProps {
+type IClockFaceProps = {
+  handsConfig: IClockHandsConfig;
   date: Date,
   expandTicks: boolean
 }
 
-function getDegrees(date: Date) {
-  const config = {
-    jump: {
-      min: false,
-      hour: false
-    }
-  };
+type IClockHandsConfig = {
+  jump: {
+    min: boolean,
+    hour: boolean
+  }
+}
+
+function getDegrees(config: IClockHandsConfig, date: Date) {
   const timeValues = {
     second: date.getSeconds(),
     min: date.getMinutes(),
@@ -38,15 +40,15 @@ function ClockFace(props: IClockFaceProps) {
   });
 
   var handNames = ["second", "min", "hour"];
-  var { second: sd, min: md, hour: hd } = getDegrees(props.date);
+  var { second: sd, min: md, hour: hd } = props.expandTicks
+    ? getDegrees(props.handsConfig, props.date)
+    : { second: 0, min: 0, hour: 0 };
   var handsData = handNames.map(x => ({
     name: x,
     degrees: x === "second" ? sd : x === "min" ? md : hd
   })).map(x => ({
     name: x.name,
-    transformStyles: { transform: `rotate(${x.degrees}deg)` },
-    transformStylesAlt: { transform: `rotate(0deg)` },
-    transformStylesNone: { }
+    transformStyles: { transform: `rotate(${x.degrees}deg)` }
   }));
 
   return (
