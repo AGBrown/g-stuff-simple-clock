@@ -2,7 +2,8 @@ import React from 'react';
 import './App.css';
 
 interface IClockFaceProps {
-  date: Date
+  date: Date,
+  expandTicks: boolean
 }
 
 function ClockFace(props: IClockFaceProps) {
@@ -17,8 +18,16 @@ function ClockFace(props: IClockFaceProps) {
     <div className="clock">
     <div className="clock-face">
       <div className="minutes">
-        {[...Array(60)].map((_, i) =>
-          <div key={`${i}`} className="tick-radius" data-minute={i} >
+        {[...Array(60)]
+          .map((_, i) => {
+            const degrees = i / 60 * 360;
+            const transform = `rotate(${degrees}deg)`;
+            var transformStyles = !props.expandTicks ? {} : { transform };
+            return { i, transformStyles };
+          })
+          .map(x =>
+          <div key={`${x.i}`} className="tick-radius" data-minute={x.i}
+            style={{ ...x.transformStyles }}>
             <div className="tickmark" />
           </div>
         )}

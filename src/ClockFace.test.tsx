@@ -4,7 +4,8 @@ import ClockFace from './ClockFace';
 
 test('renders minute marks', () => {
   const props = {
-    date: new Date(Date.now())
+    date: new Date(Date.now()),
+    expandTicks: false
   };
   render(<ClockFace {...props} />);
   [...Array(60)].forEach((_, x) => {
@@ -15,7 +16,8 @@ test('renders minute marks', () => {
 
 test('renders hand faces', () => {
   const props = {
-    date: new Date(Date.now())
+    date: new Date(Date.now()),
+    expandTicks: false
   };
   render(<ClockFace {...props} />);
   ["second", "min", "hour"].forEach(x => {
@@ -26,7 +28,8 @@ test('renders hand faces', () => {
 
 test('renders hands', () => {
   const props = {
-    date: new Date(Date.now())
+    date: new Date(Date.now()),
+    expandTicks: false
   };
   render(<ClockFace {...props} />);
   ["second", "min", "hour"].forEach(x => {
@@ -43,7 +46,10 @@ test('renders the date', () => {
     day: "numeric"
   });
 
-  const props = {date};
+  const props = {
+    date,
+    expandTicks: false
+  };
   render(<ClockFace {...props} />);
   ["second", "min", "hour"].forEach(x => {
     const e = screen.getByText(new RegExp(`^${displayDate}$`, 'i'));

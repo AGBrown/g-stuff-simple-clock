@@ -1,15 +1,17 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import './App.css';
 import ButtonsIncrements from './ButtonsIncrements';
 import ClockFace from './ClockFace';
 
 function App(props: { msg: string }) {
-  var date = new Date(Date.now());
-  var dateProps = { date };
+  const [date, _] = useState(new Date(Date.now()));
+  const [expandTicks, setExpandTicks] = useState(false);
 
   useEffect(() => {
-    console.log("App.tsx: useEffect()");
-  }, []);
+    setTimeout(() => {
+      setExpandTicks(true);
+    }, 300);
+  }, [expandTicks]);
 
   return (
     <div className="App">
@@ -17,7 +19,7 @@ function App(props: { msg: string }) {
           {props.msg}
       </header>
       <ButtonsIncrements />
-      <ClockFace { ...dateProps } />
+      <ClockFace { ...{ date, expandTicks } } />
     </div>
   );
 }
