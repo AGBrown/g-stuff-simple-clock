@@ -14,6 +14,11 @@ type IClockHandsConfig = {
     min: boolean,
     hour: boolean
   }
+  show: {
+    second: boolean,
+    min: boolean,
+    hour: boolean
+  }
 }
 
 function getDegrees(config: IClockHandsConfig, date: Date) {

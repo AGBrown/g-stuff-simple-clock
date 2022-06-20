@@ -11,8 +11,13 @@ function App(props: { msg: string }) {
 
   const handsConfig = {
     jump: {
-      min: false,
+      min: true,
       hour: false
+    },
+    show: {
+      second: false,
+      min: true,
+      hour: true
     }
   };
   const clockProps = {

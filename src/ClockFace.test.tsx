@@ -2,7 +2,9 @@ import React from 'react';
 import { render, screen } from '@testing-library/react';
 import ClockFace from './ClockFace';
 
-const getHandsConfig = () => ({ jump: { min: true, hour: true } });
+const getHandsConfig = () => ({
+  jump: { min: true, hour: true },
+  show: { min: true, hour: true, second: false } });
 
 const getClockProps = () => ( {
   handsConfig: getHandsConfig(),
