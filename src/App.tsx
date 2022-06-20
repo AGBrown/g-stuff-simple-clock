@@ -16,7 +16,7 @@ function App(props: { msg: string }) {
       min5Label: false,
       minLabel: false,
       minTicks: true,
-      hour: false,
+      hourLabel: false,
       hourTicks: true,
     }
   };
@@ -25,7 +25,7 @@ function App(props: { msg: string }) {
       min5Label: false,
       minLabel: false,
       minTicks: true,
-      hour: false,
+      hourLabel: false,
       hourTicks: true
     }
   };

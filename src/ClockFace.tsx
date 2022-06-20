@@ -37,7 +37,7 @@ const shouldShowFactory = () => {
   }
   const hourLabels = (i: number, props: IClockFaceProps) => {
     return props.ticksConfig.show.hourTicks
-      && props.ticksConfig.show.hour
+      && props.ticksConfig.show.hourLabel
       && i % 5 === 0;
   }
   const min = (i: number, props: IClockFaceProps) => {

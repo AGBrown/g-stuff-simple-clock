@@ -8,7 +8,7 @@ const getTicksConfig = () => ({
     min5Label: true,
     minLabel: true,
     minTicks: true,
-    hour: true,
+    hourLabel: true,
     hourTicks: true
   }
 });
