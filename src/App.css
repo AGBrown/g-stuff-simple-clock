@@ -89,6 +89,29 @@ body {
   background-color: #fff;
 }
 
+.tickmark-label {
+  color: #aaa;
+}
+.tickmark-label.label-min {
+  position:absolute;
+  top:50%;
+  left:50%;
+  margin-top:-50px;
+  margin-left:-0.25em;
+  transform: rotate(90deg);
+  text-align: center;
+}
+.tickmark-label.label-hour {
+  position:absolute;
+  top:50%;
+  right:50%;
+  margin-top:30px;
+  margin-right:-0.35em;
+  transform: rotate(90deg);
+  text-align: center;
+  font-size: xx-large;
+}
+
 /*--- Hands ---*/
 
 .hand {

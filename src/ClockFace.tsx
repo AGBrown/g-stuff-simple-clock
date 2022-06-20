@@ -3,6 +3,7 @@ import './App.css';
 
 type IClockFaceProps = {
   handsConfig: IClockHandsConfig;
+  ticksConfig: IClockTicksConfig;
   date: number,
   expandTicks: boolean
   rotateHands: boolean,
@@ -12,6 +13,14 @@ type IClockFaceProps = {
 type IClockHandsConfig = {
   jump: {
     min: boolean,
+    hour: boolean
+  }
+}
+
+type IClockTicksConfig = {
+  show: {
+    min: boolean,
+    min5: boolean,
     hour: boolean
   }
 }
@@ -67,15 +76,33 @@ function ClockFace(props: IClockFaceProps) {
               const degrees = i / 60 * 360;
               const transform = `rotate(${degrees}deg)`;
               const transformStyles = !props.expandTicks ? {} : { transform };
+              const minLabelTransformStyles = !props.expandTicks ? {} : {
+                transform: `rotate(${-1*degrees}deg)`
+              };
               const tickClassNames = props.rotateHands && i % 5 === 0 ? ["bold"] : [];
-              return { i, transformStyles, tickClassNames };
+              return {
+                i,
+                transformStyles,
+                tickClassNames,
+                minLabelTransformStyles
+               };
             })
             .map(x =>
             <div key={`${x.i}`}
                   className={["tick-radius", ...x.tickClassNames].join(' ')}
                   data-minute={x.i}
                   style={{ ...x.transformStyles }}>
-              <div className="tickmark" />
+              <div className="tickmark">
+                {(props.ticksConfig.show.min || (props.ticksConfig.show.min5 && x.i % 5 === 0))
+                   && <span className="tickmark-label label-min"
+                        style={{ ...x.minLabelTransformStyles }}
+                      >{x.i}</span>}
+                { (props.ticksConfig.show.hour && x.i % 5 === 0)
+                    && <div className="tickmark-label label-hour"
+                        style={{ ...x.minLabelTransformStyles }}>
+                        {(x.i % 5 === 0) ? (x.i === 0 ? 12 : x.i / 5) : ""}
+                      </div> }
+              </div>
             </div>
           )}
         </div>

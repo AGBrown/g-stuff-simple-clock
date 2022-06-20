@@ -3,9 +3,17 @@ import { render, screen } from '@testing-library/react';
 import ClockFace from './ClockFace';
 
 const getHandsConfig = () => ({ jump: { min: true, hour: true } });
+const getTicksConfig = () => ({
+  show: {
+    min: true,
+    min5: true,
+    hour: true
+  }
+});
 
 const getClockProps = () => ( {
   handsConfig: getHandsConfig(),
+  ticksConfig: getTicksConfig(),
   date: new Date(Date.now()).valueOf(),
   expandTicks: false,
   rotateHands: false,
