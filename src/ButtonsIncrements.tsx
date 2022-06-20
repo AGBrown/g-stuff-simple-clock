@@ -3,7 +3,7 @@ import moment from 'moment';
 import './ButtonsIncrements.css';
 import { IClockTicksConfig, IClockHandsConfig, IClockTicksShowConfig } from './types/ClockFaceTypes';
 import Icon from '@mdi/react';
-import { mdiAccount } from '@mdi/js';
+import { mdiAccount, mdiPlus, mdiMinus, mdiAxisXRotateClockwise } from '@mdi/js';
 
 type IButtonsIncrementsProps = {
   date: number;
@@ -32,13 +32,19 @@ function ButtonsIncrements(props: IButtonsIncrementsProps) {
   const setRndHr = (_: number) => setNewDate(m => m.hour(Math.floor(Math.random() * 24)));
   const setRndMin = (_: number) => setNewDate(m => m.minute(Math.floor(Math.random() * 60)));
 
+  const ic = {
+    '-': <Icon path={mdiPlus} size={1} />,
+    '+': <Icon path={mdiMinus} size={1} />,
+    'r': <Icon path={mdiAxisXRotateClockwise} size={1} />,
+  }
+  type icKeys = keyof typeof ic;
   const buttons= [
-    { name: 'decHr', label: '-', onClick: changeHr, value: -1 },
-    { name: 'incHr', label: '+', onClick: changeHr, value: 1 },
-    { name: 'rndHr', label: 'r', onClick: setRndHr, value: 0 },
-    { name: 'decMin', label: '-', onClick: changeMin, value: -1 },
-    { name: 'incMin', label: '+', onClick: changeMin, value: 1 },
-    { name: 'rndMin', label: 'r', onClick: setRndMin, value: 0 }
+    { name: 'decHr', label: '-' as icKeys, onClick: changeHr, value: -1 },
+    { name: 'incHr', label: '+' as icKeys, onClick: changeHr, value: 1 },
+    { name: 'rndHr', label: 'r' as icKeys, onClick: setRndHr, value: 0 },
+    { name: 'decMin', label: '-' as icKeys, onClick: changeMin, value: -1 },
+    { name: 'incMin', label: '+' as icKeys, onClick: changeMin, value: 1 },
+    { name: 'rndMin', label: 'r' as icKeys, onClick: setRndMin, value: 0 }
   ];
 
   const updateTicksConfig = (newConfig: Partial<IClockTicksShowConfig>) => {
@@ -92,14 +98,7 @@ function ButtonsIncrements(props: IButtonsIncrementsProps) {
       <div>
         {buttons.map(({ name, label, onClick, value }) => (
           <button key={name} className={`btn btn-${name}`} onClick={() => onClick(value)}>
-            <Icon path={mdiAccount}
-              title="User Profile"
-              size={1}
-              horizontal={undefined}
-              vertical={undefined}
-              rotate={undefined}
-              color="red"
-              spin={undefined} />
+            {ic[label]}
           </button>
         ))}
       </div>
