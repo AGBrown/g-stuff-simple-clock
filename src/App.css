@@ -1,38 +1,189 @@
-.App {
-  text-align: center;
+:root {
+  --clocksize: 90vh;
+
+  --tickmarkwidth: 18%;
+  --boldwidth: 2;
+
+  --tickwidth: 2%;
+  --tickheight: 50%;
+
+  --handwidth: 1.2%;
+  --handheight: 50%;
+
+  --secondwidth: 0.5%;
+  --secondheight: 60%;
+
+  --minuteheight: 45%;
+
+  --hourheight: 25%;
+
+  --center-peg-radius: 10px;
+
+  --hrs-color: #c6fec3;
+  --min-color: #fac3fe;
+  --sec-color: #fedec4;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+html {
+  background: black;
+  font-family: "helvetica neue";
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
+body {
   min-height: 100vh;
+  margin: 0;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  flex: 1;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
 }
 
-.App-link {
-  color: #61dafb;
+/*--- Clock Face ---*/
+
+.clock-width {
+  width: var(--clocksize);
+  height: 30px;
+  max-width: 90vw; /* makes layout responsive for mobile*/
+  border-radius: 50%;
+  margin: auto;
+  position: relative;
+}
+.clock {
+  width: var(--clocksize);
+  height: var(--clocksize);
+  max-width: 90vw; /* makes layout responsive for mobile*/
+  max-height: 90vw; /* makes layout responsive for mobile*/
+  border-radius: 50%;
+  margin: auto;
+  position: relative;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.clock-face {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+/*--- Tickmarks ---*/
+
+.tick-radius {
+  width: var(--tickwidth);
+  height: var(--tickheight);
+  position: absolute;
+  left: calc(50% - var(--tickwidth) / 2);
+  transform-origin: 50% 100%;
+  transition: all 2s;
+  /*background-color: #DD8888;*/
+}
+
+.minutes .tickmark {
+  width: var(--tickmarkwidth);
+  height: 8%;
+  position: relative;
+  background-color: #555;
+  margin: auto;
+}
+
+.bold .tickmark {
+  width: calc(var(--tickmarkwidth) * var(--boldwidth));
+  background-color: #fff;
+}
+
+.tickmark-label {
+  color: #aaa;
+}
+.tickmark-label.label-min {
+  position:absolute;
+  top:50%;
+  left:50%;
+  margin-top:-50px;
+  margin-left:-0.25em;
+  transform: rotate(90deg);
+  text-align: center;
+}
+.tickmark-label.label-hour {
+  color: #eee;
+  position:absolute;
+  top:50%;
+  right:50%;
+  margin-top:30px;
+  margin-right:-0.35em;
+  transform: rotate(90deg);
+  text-align: center;
+  font-size: xx-large;
+}
+
+/*--- Hands ---*/
+
+.hand {
+  width: var(--handwidth);
+  height: var(--handheight);
+  background: #999;
+  border-radius: 3px;
+  position: absolute;
+  transform-origin: 50% 100%;
+  left: calc(50% - var(--handwidth)/2);
+  transition: all 0.05s;
+  transition-timing-function: cubic-bezier(0.1, 2.7, 0.58, 1);
+}
+
+.hour-hand {
+  height: var(--hourheight);
+  top: calc(50% - var(--hourheight));
+  background: var(--hrs-color);
+}
+
+.min-hand {
+  height: var(--minuteheight);
+  top: calc(50% - var(--minuteheight));
+  background: var(--min-color);
+}
+
+.second-hand {
+  height: var(--secondheight);
+  width: var(--secondwidth);
+  transform-origin: 50% 83.3333%;
+  left: calc(50% - (var(--secondwidth)/2));
+  background: var(--sec-color);
+  display: none;
+}
+
+/*--- Components ---*/
+
+.center-peg {
+  padding: calc(var(--center-peg-radius));
+  background: white;
+  position: absolute;
+  top: calc(50% - var(--center-peg-radius));
+  left: calc(50% - var(--center-peg-radius));
+  border-radius: 50%;
+}
+
+.date-container {
+  height: 100%;
+  position: absolute;
+  right: 15%;
+  display: flex;
+}
+
+.date-container .date {
+  position: relative;
+  color: #ccc;
+  margin: auto;
+}
+
+.digital-time {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  margin-top:20px;
+  color: #ccc;
+}
+
+.chkLabel {
+  color: #ccc;
+}
+
+.button-container {
+  z-index: 1000;
 }
