@@ -1,6 +1,6 @@
 import React from 'react';
 import moment from 'moment';
-import './App.css';
+import './ButtonsIncrements.css';
 import { IClockTicksConfig, IClockHandsConfig, IClockTicksShowConfig } from './types/ClockFaceTypes';
 
 type IButtonsIncrementsProps = {
@@ -90,7 +90,7 @@ function ButtonsIncrements(props: IButtonsIncrementsProps) {
       <div>
         {buttons.map(({ name, label, onClick, value }) => (
           <button key={name} className={`btn btn-${name}`} onClick={() => onClick(value)}>
-            {label}
+            <span>{label}</span>
           </button>
         ))}
       </div>
