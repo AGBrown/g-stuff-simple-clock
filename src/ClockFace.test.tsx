@@ -2,13 +2,19 @@ import React from 'react';
 import { render, screen } from '@testing-library/react';
 import ClockFace from './ClockFace';
 
-const handsConfig = { jump: { min: true, hour: true } };
+const getHandsConfig = () => ({ jump: { min: true, hour: true } });
+
+const getClockProps = () => ( {
+  handsConfig: getHandsConfig(),
+  date: new Date(Date.now()),
+  expandTicks: false,
+  rotateHands: false,
+  handsRotated: false
+});
 
 test('renders minute marks', () => {
   const props = {
-    handsConfig,
-    date: new Date(Date.now()),
-    expandTicks: false
+    ...getClockProps()
   };
   render(<ClockFace {...props} />);
   [...Array(60)].forEach((_, x) => {
@@ -19,9 +25,7 @@ test('renders minute marks', () => {
 
 test('renders hand faces', () => {
   const props = {
-    handsConfig,
-    date: new Date(Date.now()),
-    expandTicks: false
+    ...getClockProps()
   };
   render(<ClockFace {...props} />);
   ["second", "min", "hour"].forEach(x => {
@@ -32,9 +36,7 @@ test('renders hand faces', () => {
 
 test('renders hands', () => {
   const props = {
-    handsConfig,
-    date: new Date(Date.now()),
-    expandTicks: false
+    ...getClockProps()
   };
   render(<ClockFace {...props} />);
   ["second", "min", "hour"].forEach(x => {
@@ -52,9 +54,7 @@ test('renders the date', () => {
   });
 
   const props = {
-    handsConfig,
-    date,
-    expandTicks: false
+    ...getClockProps()
   };
   render(<ClockFace {...props} />);
   ["second", "min", "hour"].forEach(x => {

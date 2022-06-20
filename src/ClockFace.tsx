@@ -5,6 +5,8 @@ type IClockFaceProps = {
   handsConfig: IClockHandsConfig;
   date: Date,
   expandTicks: boolean
+  rotateHands: boolean,
+  handsRotated: boolean,
 }
 
 type IClockHandsConfig = {
@@ -48,7 +50,10 @@ function ClockFace(props: IClockFaceProps) {
     degrees: x === "second" ? sd : x === "min" ? md : hd
   })).map(x => ({
     name: x.name,
-    transformStyles: { transform: `rotate(${x.degrees}deg)` }
+    transformStyles: {
+      transform: props.rotateHands ? `rotate(${x.degrees}deg)` : undefined,
+      transition: props.handsRotated ? "all 0.05s" : "all 2s"
+    },
   }));
 
   return (

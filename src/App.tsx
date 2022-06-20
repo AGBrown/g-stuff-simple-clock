@@ -6,6 +6,8 @@ import ClockFace from './ClockFace';
 function App(props: { msg: string }) {
   const [date, _] = useState(new Date(Date.now()));
   const [expandTicks, setExpandTicks] = useState(false);
+  const [rotateHands, setRotateHands] = useState(false);
+  const [handsRotated, setHandsRotated] = useState(false);
 
   const handsConfig = {
     jump: {
@@ -13,11 +15,24 @@ function App(props: { msg: string }) {
       hour: false
     }
   };
+  const clockProps = {
+    handsConfig,
+    date,
+    expandTicks,
+    rotateHands,
+    handsRotated
+  };
 
   useEffect(() => {
     setTimeout(() => {
       setExpandTicks(true);
     }, 300);
+    setTimeout(() => {
+      setRotateHands(true);
+    }, 1000);
+    setTimeout(() => {
+      setHandsRotated(true);
+    }, 3000);
   }, [expandTicks]);
 
   return (
@@ -26,7 +41,7 @@ function App(props: { msg: string }) {
           {props.msg}
       </header>
       <ButtonsIncrements />
-      <ClockFace { ...{ handsConfig, date, expandTicks } } />
+      <ClockFace { ...clockProps } />
     </div>
   );
 }
