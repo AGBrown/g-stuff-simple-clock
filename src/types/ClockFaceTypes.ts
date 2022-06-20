@@ -12,7 +12,9 @@ export type IClockTicksShowConfig = {
   hourLabel: boolean,
   hourTicks: boolean
 }
+export type IClockTicksShowConfigKeys = keyof IClockTicksShowConfig;
 
 export type IClockTicksConfig = {
   show: IClockTicksShowConfig
 }
+

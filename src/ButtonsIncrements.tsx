@@ -1,7 +1,12 @@
 import React from 'react';
 import moment from 'moment';
 import './App.css';
-import { IClockTicksConfig, IClockHandsConfig, IClockTicksShowConfig } from './types/ClockFaceTypes';
+import {
+  IClockTicksConfig,
+  IClockHandsConfig,
+  IClockTicksShowConfig,
+  IClockTicksShowConfigKeys
+} from './types/ClockFaceTypes';
 
 type IButtonsIncrementsProps = {
   date: number;
@@ -48,47 +53,28 @@ function ButtonsIncrements(props: IButtonsIncrementsProps) {
       }
     });
   };
+
+  const getCheckData = (k: keyof IClockTicksShowConfig, label: string) =>({
+    name: k, label, id: `chkShow_${k}`,
+    checked: props.ticksConfig.show[k],
+    value: (newValue: boolean) => ({ [k]: newValue })
+  });
   const checks= [
-    {
-      name: 'min5', label: 'm5', id: "chkShowMin5Labels",
-      checked: props.ticksConfig.show.min5Label,
-      onClick: updateTicksConfig,
-      value: (newValue: boolean) => ({ min5Label: newValue })
-    },
-    {
-      name: 'min', label: 'm', id: "chkShowMinLabels",
-      checked: props.ticksConfig.show.minLabel,
-      onClick: updateTicksConfig,
-      value: (newValue: boolean) => ({ minLabel: newValue })
-    },
-    {
-      name: 'minTicks', label: 'mt', id: "chkShowMinTicks",
-      checked: props.ticksConfig.show.minTicks,
-      onClick: updateTicksConfig,
-      value: (newValue: boolean) => ({ minTicks: newValue })
-    },
-    {
-      name: 'hour', label: 'h', id: "chkShowHrLabels",
-      checked: props.ticksConfig.show.hourLabel,
-      onClick: updateTicksConfig,
-      value: (newValue: boolean) => ({ hourLabel: newValue })
-    },
-    {
-      name: 'hourTicks', label: 'ht', id: "chkShowHrTicks",
-      checked: props.ticksConfig.show.hourTicks,
-      onClick: updateTicksConfig,
-      value: (newValue: boolean) => ({ hourTicks: newValue })
-    }
+    getCheckData('min5Label', 'm5'),
+    getCheckData('minLabel', 'm'),
+    getCheckData('minTicks', 'mt'),
+    getCheckData('hourLabel', 'h'),
+    getCheckData('hourTicks', 'ht')
   ];
 
   return (
     <div className="clock-width button-container">
       <div>
-        {checks.map(({ name, label, onClick, value, id, checked }) => (
+        {checks.map(({ name, label, value, id, checked }) => (
           <span key={name}>
             <input type="checkbox" id={id} name={id}
               checked={checked}
-              onChange={e => onClick(value(e.target.checked))} />
+              onChange={e => updateTicksConfig(value(e.target.checked))} />
             <label className="chkLabel" htmlFor={id}>{label}</label>
           </span>
         ))}
