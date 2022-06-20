@@ -29,6 +29,20 @@ function getDegrees(config: IClockHandsConfig, date: Date) {
   return degrees;
 };
 
+const shouldShowHourTicks = (i: number, props: IClockFaceProps) => {
+  return props.ticksConfig.show.hourTicks
+    && props.rotateHands
+    && i % 5 === 0;
+}
+const shouldShowHourLabels = (i: number, props: IClockFaceProps) => {
+  return props.ticksConfig.show.hourTicks
+    && props.ticksConfig.show.hour
+    && i % 5 === 0;
+}
+const shouldShowMinLabels = (i: number, props: IClockFaceProps) => {
+  return props.ticksConfig.show.min || (props.ticksConfig.show.min5 && i % 5 === 0);
+}
+
 function ClockFace(props: IClockFaceProps) {
   // format date as MMM dd
   var date = new Date(props.date);
@@ -61,14 +75,17 @@ function ClockFace(props: IClockFaceProps) {
     const minLabelTransformStyles = !props.expandTicks ? {} : {
       transform: `rotate(-${degrees}deg)`
     };
-    const tickClassNames =
-      props.ticksConfig.show.hourTicks && props.rotateHands && i % 5 === 0
-        ? ["hour"] : [];
+    const tickClassNames = shouldShowHourTicks(i, props) ? ["tick-hour"] : [];
+    const hrLabel = (i % 5 === 0) ? (i === 0 ? 12 : i / 5) : "";
     return {
       i,
       transformStyles,
       tickClassNames,
-      minLabelTransformStyles
+      minLabelTransformStyles,
+      labels: {
+        hr: hrLabel,
+        min: i
+      }
      };
   });
 
@@ -82,14 +99,14 @@ function ClockFace(props: IClockFaceProps) {
                   data-minute={x.i}
                   style={{ ...x.transformStyles }}>
               <div className="tickmark">
-                { (props.ticksConfig.show.min || (props.ticksConfig.show.min5 && x.i % 5 === 0))
+                { shouldShowMinLabels(x.i, props)
                    && <span className="tickmark-label label-min"
                         style={{ ...x.minLabelTransformStyles }}
-                      >{x.i}</span> }
-                { (props.ticksConfig.show.hourTicks && props.ticksConfig.show.hour && x.i % 5 === 0)
+                      >{x.labels.min}</span> }
+                { shouldShowHourLabels(x.i, props)
                     && <span className="tickmark-label label-hour"
                         style={{ ...x.minLabelTransformStyles }}>
-                        {(x.i % 5 === 0) ? (x.i === 0 ? 12 : x.i / 5) : ""}
+                        {x.labels.hr}
                       </span> }
               </div>
             </div>
