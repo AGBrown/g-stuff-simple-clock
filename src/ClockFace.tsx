@@ -41,10 +41,13 @@ const shouldShowFactory = () => {
       && i % 5 === 0;
   }
   const min = (i: number, props: IClockFaceProps) => {
-    return true;
+    return props.ticksConfig.show.minTicks
+      || (hour(i, props));
   }
   const minLabels = (i: number, props: IClockFaceProps) => {
-    return props.ticksConfig.show.min || (props.ticksConfig.show.min5 && i % 5 === 0);
+    return (props.ticksConfig.show.min
+        || (props.ticksConfig.show.min5 && i % 5 === 0))
+      && props.ticksConfig.show.minTicks;
   }
 
   return {

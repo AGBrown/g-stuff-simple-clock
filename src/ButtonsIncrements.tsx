@@ -62,6 +62,12 @@ function ButtonsIncrements(props: IButtonsIncrementsProps) {
       value: (newValue: boolean) => ({ min5: newValue })
     },
     {
+      name: 'minTicks', label: 'mt', id: "chkShowMinTicks",
+      checked: props.ticksConfig.show.minTicks,
+      onClick: updateTicksConfig,
+      value: (newValue: boolean) => ({ minTicks: newValue })
+    },
+    {
       name: 'hour', label: 'h', id: "chkShowHrLabels",
       checked: props.ticksConfig.show.hour,
       onClick: updateTicksConfig,
