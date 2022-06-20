@@ -4,7 +4,7 @@ import ButtonsIncrements from './ButtonsIncrements';
 import ClockFace from './ClockFace';
 import { IClockHandsConfig, IClockTicksConfig, mergeTicksConfig } from './types/ClockFaceTypes';
 
-const ticksConfigDefault: IClockTicksConfig = {
+const ticksConfigDefault = (): IClockTicksConfig => ({
   show: {
     min5Label: false,
     minLabel: false,
@@ -12,8 +12,8 @@ const ticksConfigDefault: IClockTicksConfig = {
     hourLabel: false,
     hourTicks: true,
   }
-};
-const ticksConfigFinal: IClockTicksConfig = {
+});
+const ticksConfigFinal = (): IClockTicksConfig => ({
   show: {
     min5Label: false,
     minLabel: false,
@@ -21,21 +21,21 @@ const ticksConfigFinal: IClockTicksConfig = {
     hourLabel: false,
     hourTicks: true
   }
-};
-const handsConfigDefault: IClockHandsConfig = {
+});
+const handsConfigDefault = (): IClockHandsConfig => ({
   jump: {
     min: true,
     hour: false
   }
-};
+});
 
 function App(props: { msg: string }) {
   const [date, setDate] = useState(new Date(Date.now()).valueOf());
   const [expandTicks, setExpandTicks] = useState(false);
   const [rotateHands, setRotateHands] = useState(false);
   const [handsRotated, setHandsRotated] = useState(false);
-  const [handsConfig, setHandsConfig] = useState(handsConfigDefault);
-  const [ticksConfig, setTicksConfig] = useState(ticksConfigDefault);
+  const [handsConfig, setHandsConfig] = useState(handsConfigDefault());
+  const [ticksConfig, setTicksConfig] = useState(ticksConfigDefault());
 
   const clockProps = {
     handsConfig,
@@ -60,7 +60,7 @@ function App(props: { msg: string }) {
     }, 1000);
     setTimeout(() => {
       setHandsRotated(true);
-      setTicksConfig(t => mergeTicksConfig(t, ticksConfigFinal.show))
+      setTicksConfig(t => mergeTicksConfig(t, ticksConfigFinal().show))
     }, 3000);
   }, []);
 
