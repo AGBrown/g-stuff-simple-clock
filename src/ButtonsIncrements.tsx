@@ -12,7 +12,7 @@ import {
   mergeTicksConfig,
 } from './types/ClockFaceTypes';
 import Icon from '@mdi/react';
-import { mdiAccount, mdiPlus, mdiMinus, mdiAxisXRotateClockwise } from '@mdi/js';
+import { mdiPlus, mdiMinus, mdiAxisXRotateClockwise } from '@mdi/js';
 
 type IButtonsIncrementsProps = {
   date: number;
