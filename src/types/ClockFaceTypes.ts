@@ -7,7 +7,7 @@ export type IClockHandsConfig = {
 
 export type IClockTicksShowConfig = {
   min5Label: boolean,
-  min: boolean,
+  minLabel: boolean,
   minTicks: boolean,
   hour: boolean,
   hourTicks: boolean

@@ -9,7 +9,7 @@ const getProps = () => ({
   ticksConfig: {
     show: {
       min5Label: false,
-      min: false,
+      minLabel: false,
       minTicks: true,
       hour: false,
       hourTicks: false,

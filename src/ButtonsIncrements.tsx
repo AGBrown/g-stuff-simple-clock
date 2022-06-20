@@ -57,9 +57,9 @@ function ButtonsIncrements(props: IButtonsIncrementsProps) {
     },
     {
       name: 'min', label: 'm', id: "chkShowMinLabels",
-      checked: props.ticksConfig.show.min,
+      checked: props.ticksConfig.show.minLabel,
       onClick: updateTicksConfig,
-      value: (newValue: boolean) => ({ min: newValue })
+      value: (newValue: boolean) => ({ minLabel: newValue })
     },
     {
       name: 'minTicks', label: 'mt', id: "chkShowMinTicks",

@@ -6,7 +6,7 @@ const getHandsConfig = () => ({ jump: { min: true, hour: true } });
 const getTicksConfig = () => ({
   show: {
     min5Label: true,
-    min: true,
+    minLabel: true,
     minTicks: true,
     hour: true,
     hourTicks: true
