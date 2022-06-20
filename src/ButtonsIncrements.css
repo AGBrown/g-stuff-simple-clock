@@ -60,3 +60,7 @@
 
   transition: width .2s ease-out, padding-top .2s ease-out;
 }
+
+svc.btn {
+  width: 1.5rem;
+}

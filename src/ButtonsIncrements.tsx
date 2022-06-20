@@ -2,6 +2,8 @@ import React from 'react';
 import moment from 'moment';
 import './ButtonsIncrements.css';
 import { IClockTicksConfig, IClockHandsConfig, IClockTicksShowConfig } from './types/ClockFaceTypes';
+import Icon from '@mdi/react';
+import { mdiAccount } from '@mdi/js';
 
 type IButtonsIncrementsProps = {
   date: number;
@@ -90,7 +92,14 @@ function ButtonsIncrements(props: IButtonsIncrementsProps) {
       <div>
         {buttons.map(({ name, label, onClick, value }) => (
           <button key={name} className={`btn btn-${name}`} onClick={() => onClick(value)}>
-            <span>{label}</span>
+            <Icon path={mdiAccount}
+              title="User Profile"
+              size={1}
+              horizontal={undefined}
+              vertical={undefined}
+              rotate={undefined}
+              color="red"
+              spin={undefined} />
           </button>
         ))}
       </div>
