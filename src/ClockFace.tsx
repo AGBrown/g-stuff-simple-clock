@@ -40,6 +40,9 @@ const shouldShowFactory = () => {
       && props.ticksConfig.show.hour
       && i % 5 === 0;
   }
+  const min = (i: number, props: IClockFaceProps) => {
+    return true;
+  }
   const minLabels = (i: number, props: IClockFaceProps) => {
     return props.ticksConfig.show.min || (props.ticksConfig.show.min5 && i % 5 === 0);
   }
@@ -47,6 +50,7 @@ const shouldShowFactory = () => {
   return {
     ticks: {
       hour: hour,
+      min: min,
     },
     labels: {
       hour: hourLabels,
@@ -88,7 +92,10 @@ function ClockFace(props: IClockFaceProps) {
     const minLabelTransformStyles = !props.expandTicks ? {} : {
       transform: `rotate(-${degrees}deg)`
     };
-    const tickClassNames = shouldShow.ticks.hour(i, props) ? ["tick-hour"] : [];
+    const tickClassNames =
+      shouldShow.ticks.hour(i, props) ? ["tick-hour"]
+      : !shouldShow.ticks.min(i, props) ? ["tick-hide"]
+      : [];
     const hrLabel = (i % 5 === 0) ? (i === 0 ? 12 : i / 5) : "";
     return {
       i,

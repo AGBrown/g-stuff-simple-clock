@@ -89,7 +89,7 @@ body {
   background-color: #fff;
 }
 
-.hide .tickmark {
+.tick-hide .tickmark {
   display: none;
 }
 
