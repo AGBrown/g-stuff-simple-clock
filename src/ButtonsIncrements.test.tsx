@@ -8,9 +8,10 @@ const getProps = () => ({
   setDate: (date: number) => { },
   ticksConfig: {
     show: {
-      min: false,
-      min5: false,
-      hour: false,
+      min5Label: false,
+      minLabel: false,
+      minTicks: true,
+      hourLabel: false,
       hourTicks: false,
     }
   },

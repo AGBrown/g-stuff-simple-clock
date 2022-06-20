@@ -5,9 +5,10 @@ import ClockFace from './ClockFace';
 const getHandsConfig = () => ({ jump: { min: true, hour: true } });
 const getTicksConfig = () => ({
   show: {
-    min: true,
-    min5: true,
-    hour: true,
+    min5Label: true,
+    minLabel: true,
+    minTicks: true,
+    hourLabel: true,
     hourTicks: true
   }
 });
