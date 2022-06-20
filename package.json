@@ -19,8 +19,8 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "predeploy": "npm run build",
-    "deploy": "$VER=\"$(git describe)\"; echo $VER; npx gh-pages -d build -m \"$(git describe)\"; git fetch origin gh-pages;",
+    "predeploy": "ls; $VER=\"$(git describe)\"; echo $VER; pushd public; ls; $fc=(gc version.json); echo $fc; $fc.Replace('version not-set', $VER) > version.json; popd; npm run build",
+    "deploy": "npx gh-pages -d build -m \"$(git describe)\"; git fetch origin gh-pages;",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
