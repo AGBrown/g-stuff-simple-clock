@@ -43,6 +43,7 @@ function ClockFace(props: IClockFaceProps) {
   });
 
   var handNames = ["second", "min", "hour"];
+  // TODO: fix animations. Need to know old and new, and when cross the top need to add so you go above 360/below 0
   var { second: sd, min: md, hour: hd } = props.expandTicks
     ? getDegrees(props.handsConfig, date)
     : { second: 0, min: 0, hour: 0 };
