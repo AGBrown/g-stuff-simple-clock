@@ -64,12 +64,15 @@ function ClockFace(props: IClockFaceProps) {
             .map((_, i) => {
               const degrees = i / 60 * 360;
               const transform = `rotate(${degrees}deg)`;
-              var transformStyles = !props.expandTicks ? {} : { transform };
-              return { i, transformStyles };
+              const transformStyles = !props.expandTicks ? {} : { transform };
+              const tickClassNames = props.rotateHands && i % 5 === 0 ? ["bold"] : [];
+              return { i, transformStyles, tickClassNames };
             })
             .map(x =>
-            <div key={`${x.i}`} className="tick-radius" data-minute={x.i}
-              style={{ ...x.transformStyles }}>
+            <div key={`${x.i}`}
+                  className={["tick-radius", ...x.tickClassNames].join(' ')}
+                  data-minute={x.i}
+                  style={{ ...x.transformStyles }}>
               <div className="tickmark" />
             </div>
           )}
