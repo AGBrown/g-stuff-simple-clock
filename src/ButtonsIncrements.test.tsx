@@ -30,6 +30,7 @@ const getProps = () => ({
 test('todo', () => {
   const props = getProps();
   render(<ButtonsIncrements {...props} />);
-  const es = screen.getAllByText(/-/i);
-  es.forEach(e => expect(e).toBeInTheDocument());
+
+  const e = screen.getByText((_, e) => new RegExp('decHr').test(e?.getAttribute('id') ?? ""));
+  expect(e).toBeInTheDocument();
 });
