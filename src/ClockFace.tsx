@@ -53,43 +53,43 @@ function ClockFace(props: IClockFaceProps) {
     },
   }));
 
+  var tickMarksData = [...Array(60)].map((_, i) => {
+    const degrees = i / 60 * 360;
+    const transform = `rotate(${degrees}deg)`;
+    const transformStyles = !props.expandTicks ? {} : { transform };
+    const minLabelTransformStyles = !props.expandTicks ? {} : {
+      transform: `rotate(${-1*degrees}deg)`
+    };
+    const tickClassNames =
+      props.ticksConfig.show.hourTicks && props.rotateHands && i % 5 === 0
+        ? ["bold"] : [];
+    return {
+      i,
+      transformStyles,
+      tickClassNames,
+      minLabelTransformStyles
+     };
+  });
+
   return (
     <div className="clock">
       <div className="clock-face">
         <div className="minutes">
-          {[...Array(60)]
-            .map((_, i) => {
-              const degrees = i / 60 * 360;
-              const transform = `rotate(${degrees}deg)`;
-              const transformStyles = !props.expandTicks ? {} : { transform };
-              const minLabelTransformStyles = !props.expandTicks ? {} : {
-                transform: `rotate(${-1*degrees}deg)`
-              };
-              const tickClassNames =
-                props.ticksConfig.show.hourTicks && props.rotateHands && i % 5 === 0
-                  ? ["bold"] : [];
-              return {
-                i,
-                transformStyles,
-                tickClassNames,
-                minLabelTransformStyles
-               };
-            })
-            .map(x =>
+          {tickMarksData.map(x =>
             <div key={`${x.i}`}
                   className={["tick-radius", ...x.tickClassNames].join(' ')}
                   data-minute={x.i}
                   style={{ ...x.transformStyles }}>
               <div className="tickmark">
-                {(props.ticksConfig.show.min || (props.ticksConfig.show.min5 && x.i % 5 === 0))
+                { (props.ticksConfig.show.min || (props.ticksConfig.show.min5 && x.i % 5 === 0))
                    && <span className="tickmark-label label-min"
                         style={{ ...x.minLabelTransformStyles }}
-                      >{x.i}</span>}
+                      >{x.i}</span> }
                 { (props.ticksConfig.show.hourTicks && props.ticksConfig.show.hour && x.i % 5 === 0)
-                    && <div className="tickmark-label label-hour"
+                    && <span className="tickmark-label label-hour"
                         style={{ ...x.minLabelTransformStyles }}>
                         {(x.i % 5 === 0) ? (x.i === 0 ? 12 : x.i / 5) : ""}
-                      </div> }
+                      </span> }
               </div>
             </div>
           )}
