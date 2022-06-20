@@ -46,9 +46,10 @@ body {
   max-width: 90vw; /* makes layout responsive for mobile*/
   border-radius: 50%;
   margin: auto;
-  position: relative;
 }
 .clock {
+  display: block;
+  padding: 2em;
   width: var(--clocksize);
   height: var(--clocksize);
   max-width: 90vw; /* makes layout responsive for mobile*/
@@ -184,6 +185,9 @@ body {
   color: #ccc;
 }
 
-.button-container {
-  z-index: 1000;
+.clock-width.all-buttons-container {
+}
+.all-buttons-container {
+  z-index: 10000;
+  font-size:x-large;
 }

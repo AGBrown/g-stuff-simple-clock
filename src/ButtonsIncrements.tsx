@@ -1,6 +1,6 @@
 import React from 'react';
 import moment from 'moment';
-import './App.css';
+import './ButtonsIncrements.css';
 import { IClockTicksConfig, IClockHandsConfig, IClockTicksShowConfig } from './types/ClockFaceTypes';
 
 type IButtonsIncrementsProps = {
@@ -75,8 +75,10 @@ function ButtonsIncrements(props: IButtonsIncrementsProps) {
     }
   ];
 
+  const materialBtnClassNames = "mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored";
+
   return (
-    <div className="clock-width button-container">
+    <div className="clock-width all-buttons-container">
       <div>
         {checks.map(({ name, label, onClick, value, id, checked }) => (
           <span key={name}>
@@ -87,9 +89,11 @@ function ButtonsIncrements(props: IButtonsIncrementsProps) {
           </span>
         ))}
       </div>
-      <div>
+      <div className="xbutton-container">
         {buttons.map(({ name, label, onClick, value }) => (
-          <button key={name} className={`btn btn-${name}`} onClick={() => onClick(value)}>
+          <button key={name}
+            className={`${materialBtnClassNames}`}
+            onClick={() => onClick(value)}>
             {label}
           </button>
         ))}
