@@ -31,8 +31,8 @@ function ButtonsIncrements(props: IButtonsIncrementsProps) {
   const changeHr = (by: number) => setNewDate(m => m.add(by, 'hour'));
   const changeMin = (by: number) => setNewDate(m => m.add(by, 'minute'));
 
-  const setHr = (hr: number) => setNewDate(m => m.hour(hr));
-  const setMin = (min: number) => setNewDate(m => m.minute(min));
+  // const setHr = (hr: number) => setNewDate(m => m.hour(hr));
+  // const setMin = (min: number) => setNewDate(m => m.minute(min));
 
   const setRndHr = (_: number) => setNewDate(m => m.hour(Math.floor(Math.random() * 24)));
   const setRndMin = (_: number) => setNewDate(m => m.minute(Math.floor(Math.random() * 60)));
