@@ -29,19 +29,32 @@ function getDegrees(config: IClockHandsConfig, date: Date) {
   return degrees;
 };
 
-const shouldShowHourTicks = (i: number, props: IClockFaceProps) => {
-  return props.ticksConfig.show.hourTicks
-    && props.rotateHands
-    && i % 5 === 0;
-}
-const shouldShowHourLabels = (i: number, props: IClockFaceProps) => {
-  return props.ticksConfig.show.hourTicks
-    && props.ticksConfig.show.hour
-    && i % 5 === 0;
-}
-const shouldShowMinLabels = (i: number, props: IClockFaceProps) => {
-  return props.ticksConfig.show.min || (props.ticksConfig.show.min5 && i % 5 === 0);
-}
+const shouldShowFactory = () => {
+  const hour = (i: number, props: IClockFaceProps) => {
+    return props.ticksConfig.show.hourTicks
+      && props.rotateHands
+      && i % 5 === 0;
+  }
+  const hourLabels = (i: number, props: IClockFaceProps) => {
+    return props.ticksConfig.show.hourTicks
+      && props.ticksConfig.show.hour
+      && i % 5 === 0;
+  }
+  const minLabels = (i: number, props: IClockFaceProps) => {
+    return props.ticksConfig.show.min || (props.ticksConfig.show.min5 && i % 5 === 0);
+  }
+
+  return {
+    ticks: {
+      hour: hour,
+    },
+    labels: {
+      hour: hourLabels,
+      min: minLabels
+    }
+  }
+};
+const shouldShow = shouldShowFactory();
 
 function ClockFace(props: IClockFaceProps) {
   // format date as MMM dd
@@ -75,7 +88,7 @@ function ClockFace(props: IClockFaceProps) {
     const minLabelTransformStyles = !props.expandTicks ? {} : {
       transform: `rotate(-${degrees}deg)`
     };
-    const tickClassNames = shouldShowHourTicks(i, props) ? ["tick-hour"] : [];
+    const tickClassNames = shouldShow.ticks.hour(i, props) ? ["tick-hour"] : [];
     const hrLabel = (i % 5 === 0) ? (i === 0 ? 12 : i / 5) : "";
     return {
       i,
@@ -99,11 +112,11 @@ function ClockFace(props: IClockFaceProps) {
                   data-minute={x.i}
                   style={{ ...x.transformStyles }}>
               <div className="tickmark">
-                { shouldShowMinLabels(x.i, props)
+                { shouldShow.labels.min(x.i, props)
                    && <span className="tickmark-label label-min"
                         style={{ ...x.minLabelTransformStyles }}
                       >{x.labels.min}</span> }
-                { shouldShowHourLabels(x.i, props)
+                { shouldShow.labels.hour(x.i, props)
                     && <span className="tickmark-label label-hour"
                         style={{ ...x.minLabelTransformStyles }}>
                         {x.labels.hr}
