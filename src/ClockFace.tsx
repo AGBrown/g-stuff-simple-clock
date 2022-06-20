@@ -1,5 +1,6 @@
 import React from 'react';
 import './App.css';
+import { IClockHandsConfig, IClockTicksConfig } from './types/ClockFaceTypes';
 
 type IClockFaceProps = {
   handsConfig: IClockHandsConfig;
@@ -8,21 +9,6 @@ type IClockFaceProps = {
   expandTicks: boolean
   rotateHands: boolean,
   handsRotated: boolean,
-}
-
-type IClockHandsConfig = {
-  jump: {
-    min: boolean,
-    hour: boolean
-  }
-}
-
-type IClockTicksConfig = {
-  show: {
-    min: boolean,
-    min5: boolean,
-    hour: boolean
-  }
 }
 
 function getDegrees(config: IClockHandsConfig, date: Date) {

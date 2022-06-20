@@ -2,22 +2,23 @@ import React, { useEffect, useState } from 'react';
 import './App.css';
 import ButtonsIncrements from './ButtonsIncrements';
 import ClockFace from './ClockFace';
+import { IClockHandsConfig, IClockTicksConfig } from './types/ClockFaceTypes';
 
 function App(props: { msg: string }) {
-  const handsConfigDefault = {
+  const handsConfigDefault: IClockHandsConfig = {
     jump: {
       min: true,
       hour: false
     }
   };
-  const ticksConfigDefault = {
+  const ticksConfigDefault: IClockTicksConfig = {
     show: {
       min: false,
       min5: false,
       hour: false
     }
   };
-  const ticksConfigFinal = {
+  const ticksConfigFinal: IClockTicksConfig = {
     show: {
       min: false,
       min5: false,
@@ -29,7 +30,7 @@ function App(props: { msg: string }) {
   const [expandTicks, setExpandTicks] = useState(false);
   const [rotateHands, setRotateHands] = useState(false);
   const [handsRotated, setHandsRotated] = useState(false);
-  const [handsConfig, _] = useState(handsConfigDefault);
+  const [handsConfig, setHandsConfig] = useState(handsConfigDefault);
   const [ticksConfig, setTicksConfig] = useState(ticksConfigDefault);
 
   const clockProps = {
@@ -39,6 +40,11 @@ function App(props: { msg: string }) {
     expandTicks,
     rotateHands,
     handsRotated
+  };
+
+  const buttonMutators = {
+    setTicksConfig,
+    setHandsConfig
   };
 
   useEffect(() => {
@@ -58,14 +64,14 @@ function App(props: { msg: string }) {
         }
       })
     }, 3000);
-  }, [expandTicks, rotateHands, handsRotated, ticksConfig]);
+  }, []);
 
   return (
     <div className="App">
       <header>
           {props.msg}
       </header>
-      <ButtonsIncrements { ...{ date, setDate } } />
+      <ButtonsIncrements { ...{ date, setDate, ticksConfig, stateMutators: buttonMutators } } />
       <ClockFace { ...clockProps } />
     </div>
   );

@@ -167,7 +167,7 @@ body {
 
 .date-container .date {
   position: relative;
-  color: #FFF;
+  color: #ccc;
   margin: auto;
 }
 
@@ -176,5 +176,13 @@ body {
   bottom: 0;
   right: 0;
   margin-top:20px;
-  color: #FFF;
+  color: #ccc;
+}
+
+.chkLabel {
+  color: #ccc;
+}
+
+.button-container {
+  z-index: 1000;
 }

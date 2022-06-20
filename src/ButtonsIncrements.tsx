@@ -1,10 +1,16 @@
 import React from 'react';
 import moment from 'moment';
 import './App.css';
+import { IClockTicksConfig, IClockHandsConfig, IClockTicksShowConfig } from './types/ClockFaceTypes';
 
 type IButtonsIncrementsProps = {
-  date: number,
+  date: number;
   setDate: (date: number) => void;
+  ticksConfig: IClockTicksConfig;
+  stateMutators: {
+    setTicksConfig: (ticksConfig: IClockTicksConfig) => void;
+    setHandsConfig: (handsConfig: IClockHandsConfig) => void;
+  }
 }
 
 function ButtonsIncrements(props: IButtonsIncrementsProps) {
@@ -33,13 +39,55 @@ function ButtonsIncrements(props: IButtonsIncrementsProps) {
     { name: 'rndMin', label: 'r', onClick: setRndMin, value: 0 }
   ];
 
+  const updateTicksConfig = (newConfig: Partial<IClockTicksShowConfig>) => {
+    props.stateMutators.setTicksConfig({
+      ...props.ticksConfig,
+      show: {
+        ...props.ticksConfig.show,
+        ...newConfig
+      }
+    });
+  };
+  const checks= [
+    {
+      name: 'min', label: 'm', id: "chkShowMinLabels",
+      checked: props.ticksConfig.show.min,
+      onClick: updateTicksConfig,
+      value: (newValue: boolean) => ({ min: newValue })
+    },
+    {
+      name: 'min5', label: 'm5', id: "chkShowMin5Labels",
+      checked: props.ticksConfig.show.min5,
+      onClick: updateTicksConfig,
+      value: (newValue: boolean) => ({ min5: newValue })
+    },
+    {
+      name: 'hour', label: 'h', id: "chkShowHrLabels",
+      checked: props.ticksConfig.show.hour,
+      onClick: updateTicksConfig,
+      value: (newValue: boolean) => ({ hour: newValue })
+    }
+  ];
+
   return (
-    <div className="clock-width">
-      {buttons.map(({ name, label, onClick, value }) => (
-        <button key={name} className={`btn btn-${name}`} onClick={() => onClick(value)}>
-          {label}
-        </button>
-      ))}
+    <div className="clock-width button-container">
+      <div>
+        {checks.map(({ name, label, onClick, value, id, checked }) => (
+          <span key={name}>
+            <input type="checkbox" id={id} name={id}
+              checked={checked}
+              onChange={e => onClick(value(e.target.checked))} />
+            <label className="chkLabel" htmlFor={id}>{label}</label>
+          </span>
+        ))}
+      </div>
+      <div>
+        {buttons.map(({ name, label, onClick, value }) => (
+          <button key={name} className={`btn btn-${name}`} onClick={() => onClick(value)}>
+            {label}
+          </button>
+        ))}
+      </div>
     </div>
   );
 }

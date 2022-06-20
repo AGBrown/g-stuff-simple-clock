@@ -1,10 +1,22 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import ButtonsIncrements from './ButtonsIncrements';
+import { IClockHandsConfig, IClockTicksConfig } from './types/ClockFaceTypes';
 
 const getProps = () => ({
   date: new Date(Date.now()).valueOf(),
-  setDate: (date: number) => { }
+  setDate: (date: number) => { },
+  ticksConfig: {
+    show: {
+      min: false,
+      min5: false,
+      hour: false
+    }
+  },
+  stateMutators: {
+    setTicksConfig: (ticksConfig: IClockTicksConfig) => {},
+    setHandsConfig: (handsConfig: IClockHandsConfig) => {}
+  }
 });
 
 test('todo', () => {
