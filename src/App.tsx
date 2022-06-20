@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import './App.css';
 import ButtonsIncrements from './ButtonsIncrements';
 import ClockFace from './ClockFace';
-import { IClockHandsConfig, IClockTicksConfig } from './types/ClockFaceTypes';
+import { IClockHandsConfig, IClockTicksConfig, mergeTicksConfig } from './types/ClockFaceTypes';
 
 const ticksConfigDefault: IClockTicksConfig = {
   show: {
@@ -60,13 +60,7 @@ function App(props: { msg: string }) {
     }, 1000);
     setTimeout(() => {
       setHandsRotated(true);
-      setTicksConfig(t => ({
-        ...t,
-        show: {
-          ...t.show,
-          ...ticksConfigFinal.show
-        }
-      }))
+      setTicksConfig(t => mergeTicksConfig(t, ticksConfigFinal.show))
     }, 3000);
   }, []);
 
