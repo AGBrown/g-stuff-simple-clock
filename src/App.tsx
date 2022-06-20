@@ -29,7 +29,7 @@ const handsConfigDefault = (): IClockHandsConfig => ({
   }
 });
 
-function App(props: { msg: string }) {
+function App(props: { version: string }) {
   const [date, setDate] = useState(new Date(Date.now()).valueOf());
   const [expandTicks, setExpandTicks] = useState(false);
   const [rotateHands, setRotateHands] = useState(false);
@@ -68,11 +68,9 @@ function App(props: { msg: string }) {
 
   return (
     <div className="App">
-      <header>
-          {props.msg}
-      </header>
       <ButtonsIncrements { ...clockProps } />
       <ClockFace { ...clockProps } />
+      <span className="version">{props.version}</span>
     </div>
   );
 }
