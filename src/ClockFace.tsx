@@ -55,14 +55,15 @@ function ClockFace(props: IClockFaceProps) {
 
   var tickMarksData = [...Array(60)].map((_, i) => {
     const degrees = i / 60 * 360;
-    const transform = `rotate(${degrees}deg)`;
-    const transformStyles = !props.expandTicks ? {} : { transform };
+    const transformStyles = !props.expandTicks ? {} : {
+      transform: `rotate(${degrees}deg)`
+    };
     const minLabelTransformStyles = !props.expandTicks ? {} : {
-      transform: `rotate(${-1*degrees}deg)`
+      transform: `rotate(-${degrees}deg)`
     };
     const tickClassNames =
       props.ticksConfig.show.hourTicks && props.rotateHands && i % 5 === 0
-        ? ["bold"] : [];
+        ? ["hour"] : [];
     return {
       i,
       transformStyles,

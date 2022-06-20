@@ -84,9 +84,13 @@ body {
   margin: auto;
 }
 
-.bold .tickmark {
+.tick-hour .tickmark {
   width: calc(var(--tickmarkwidth) * var(--boldwidth));
   background-color: #fff;
+}
+
+.hide .tickmark {
+  display: none;
 }
 
 .tickmark-label {
