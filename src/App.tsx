@@ -15,6 +15,7 @@ function App(props: { msg: string }) {
     show: {
       min: false,
       min5: false,
+      minTicks: true,
       hour: false,
       hourTicks: true,
     }
@@ -23,6 +24,7 @@ function App(props: { msg: string }) {
     show: {
       min: false,
       min5: false,
+      minTicks: true,
       hour: false,
       hourTicks: true
     }
