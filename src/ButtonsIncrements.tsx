@@ -1,12 +1,14 @@
 import React from 'react';
 import moment from 'moment';
 import './App.css';
-import type {
+import {
   IClockTicksConfig,
   IClockHandsConfig,
   IClockTicksShowConfig,
+  IClockHandsJumpConfig,
 } from './types/ClockFaceTypes';
 import {
+  mergeHandsConfig,
   mergeTicksConfig,
 } from './types/ClockFaceTypes';
 
@@ -14,6 +16,7 @@ type IButtonsIncrementsProps = {
   date: number;
   setDate: (date: number) => void;
   ticksConfig: IClockTicksConfig;
+  handsConfig: IClockHandsConfig;
   stateMutators: {
     setTicksConfig: (ticksConfig: IClockTicksConfig) => void;
     setHandsConfig: (handsConfig: IClockHandsConfig) => void;
@@ -46,6 +49,14 @@ function ButtonsIncrements(props: IButtonsIncrementsProps) {
     { name: 'rndMin', label: 'r', onClick: setRndMin, value: 0 }
   ];
 
+  const getCheckDataHands = (k: keyof IClockHandsJumpConfig, label: string) => ({
+    name: `${k}-jump`, label, id: `chkJump_${k}`,
+    checked: props.handsConfig.jump[k],
+    onChange: (x: boolean) => {
+      var newConfig = mergeHandsConfig(props.handsConfig, { [k]: x });
+      props.stateMutators.setHandsConfig(newConfig);
+    }
+  });
   const getCheckData = (k: keyof IClockTicksShowConfig, label: string) => ({
     name: k, label, id: `chkShow_${k}`,
     checked: props.ticksConfig.show[k],
@@ -59,7 +70,8 @@ function ButtonsIncrements(props: IButtonsIncrementsProps) {
     getCheckData('minLabel', 'm'),
     getCheckData('minTicks', 'mt'),
     getCheckData('hourLabel', 'h'),
-    getCheckData('hourTicks', 'ht')
+    getCheckData('hourTicks', 'ht'),
+    getCheckDataHands('hour', 'hhj')
   ];
 
   return (
