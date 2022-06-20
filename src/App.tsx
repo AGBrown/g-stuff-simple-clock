@@ -13,8 +13,8 @@ function App(props: { msg: string }) {
   };
   const ticksConfigDefault: IClockTicksConfig = {
     show: {
-      min: false,
       min5: false,
+      min: false,
       minTicks: true,
       hour: false,
       hourTicks: true,
@@ -22,8 +22,8 @@ function App(props: { msg: string }) {
   };
   const ticksConfigFinal: IClockTicksConfig = {
     show: {
-      min: false,
       min5: false,
+      min: false,
       minTicks: true,
       hour: false,
       hourTicks: true

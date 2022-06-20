@@ -50,16 +50,16 @@ function ButtonsIncrements(props: IButtonsIncrementsProps) {
   };
   const checks= [
     {
-      name: 'min', label: 'm', id: "chkShowMinLabels",
-      checked: props.ticksConfig.show.min,
-      onClick: updateTicksConfig,
-      value: (newValue: boolean) => ({ min: newValue })
-    },
-    {
       name: 'min5', label: 'm5', id: "chkShowMin5Labels",
       checked: props.ticksConfig.show.min5,
       onClick: updateTicksConfig,
       value: (newValue: boolean) => ({ min5: newValue })
+    },
+    {
+      name: 'min', label: 'm', id: "chkShowMinLabels",
+      checked: props.ticksConfig.show.min,
+      onClick: updateTicksConfig,
+      value: (newValue: boolean) => ({ min: newValue })
     },
     {
       name: 'minTicks', label: 'mt', id: "chkShowMinTicks",
