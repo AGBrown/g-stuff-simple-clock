@@ -10,7 +10,8 @@ const getProps = () => ({
     show: {
       min: false,
       min5: false,
-      hour: false
+      hour: false,
+      hourTicks: false,
     }
   },
   stateMutators: {

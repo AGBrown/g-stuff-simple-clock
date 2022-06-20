@@ -15,14 +15,16 @@ function App(props: { msg: string }) {
     show: {
       min: false,
       min5: false,
-      hour: false
+      hour: false,
+      hourTicks: true,
     }
   };
   const ticksConfigFinal: IClockTicksConfig = {
     show: {
       min: false,
       min5: false,
-      hour: false
+      hour: false,
+      hourTicks: true
     }
   };
 

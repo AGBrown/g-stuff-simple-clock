@@ -65,7 +65,9 @@ function ClockFace(props: IClockFaceProps) {
               const minLabelTransformStyles = !props.expandTicks ? {} : {
                 transform: `rotate(${-1*degrees}deg)`
               };
-              const tickClassNames = props.rotateHands && i % 5 === 0 ? ["bold"] : [];
+              const tickClassNames =
+                props.ticksConfig.show.hourTicks && props.rotateHands && i % 5 === 0
+                  ? ["bold"] : [];
               return {
                 i,
                 transformStyles,
@@ -83,7 +85,7 @@ function ClockFace(props: IClockFaceProps) {
                    && <span className="tickmark-label label-min"
                         style={{ ...x.minLabelTransformStyles }}
                       >{x.i}</span>}
-                { (props.ticksConfig.show.hour && x.i % 5 === 0)
+                { (props.ticksConfig.show.hourTicks && props.ticksConfig.show.hour && x.i % 5 === 0)
                     && <div className="tickmark-label label-hour"
                         style={{ ...x.minLabelTransformStyles }}>
                         {(x.i % 5 === 0) ? (x.i === 0 ? 12 : x.i / 5) : ""}

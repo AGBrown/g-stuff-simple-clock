@@ -102,6 +102,7 @@ body {
   text-align: center;
 }
 .tickmark-label.label-hour {
+  color: #eee;
   position:absolute;
   top:50%;
   right:50%;

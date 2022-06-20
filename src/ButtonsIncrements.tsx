@@ -66,6 +66,12 @@ function ButtonsIncrements(props: IButtonsIncrementsProps) {
       checked: props.ticksConfig.show.hour,
       onClick: updateTicksConfig,
       value: (newValue: boolean) => ({ hour: newValue })
+    },
+    {
+      name: 'hourTicks', label: 'ht', id: "chkShowHrTicks",
+      checked: props.ticksConfig.show.hourTicks,
+      onClick: updateTicksConfig,
+      value: (newValue: boolean) => ({ hourTicks: newValue })
     }
   ];
 
