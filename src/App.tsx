@@ -4,7 +4,7 @@ import ButtonsIncrements from './ButtonsIncrements';
 import ClockFace from './ClockFace';
 
 function App(props: { msg: string }) {
-  const [date, _] = useState(new Date(Date.now()));
+  const [date, setDate] = useState(new Date(Date.now()).valueOf());
   const [expandTicks, setExpandTicks] = useState(false);
   const [rotateHands, setRotateHands] = useState(false);
   const [handsRotated, setHandsRotated] = useState(false);
@@ -40,7 +40,7 @@ function App(props: { msg: string }) {
       <header>
           {props.msg}
       </header>
-      <ButtonsIncrements />
+      <ButtonsIncrements { ...{ date, setDate } } />
       <ClockFace { ...clockProps } />
     </div>
   );

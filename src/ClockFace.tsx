@@ -3,7 +3,7 @@ import './App.css';
 
 type IClockFaceProps = {
   handsConfig: IClockHandsConfig;
-  date: Date,
+  date: number,
   expandTicks: boolean
   rotateHands: boolean,
   handsRotated: boolean,
@@ -36,14 +36,15 @@ function getDegrees(config: IClockHandsConfig, date: Date) {
 
 function ClockFace(props: IClockFaceProps) {
   // format date as MMM dd
-  var displayDate = props.date.toLocaleDateString("en-US", {
+  var date = new Date(props.date);
+  var displayDate = date.toLocaleDateString("en-US", {
     month: "short",
     day: "numeric"
   });
 
   var handNames = ["second", "min", "hour"];
   var { second: sd, min: md, hour: hd } = props.expandTicks
-    ? getDegrees(props.handsConfig, props.date)
+    ? getDegrees(props.handsConfig, date)
     : { second: 0, min: 0, hour: 0 };
   var handsData = handNames.map(x => ({
     name: x,

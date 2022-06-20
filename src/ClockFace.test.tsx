@@ -6,7 +6,7 @@ const getHandsConfig = () => ({ jump: { min: true, hour: true } });
 
 const getClockProps = () => ( {
   handsConfig: getHandsConfig(),
-  date: new Date(Date.now()),
+  date: new Date(Date.now()).valueOf(),
   expandTicks: false,
   rotateHands: false,
   handsRotated: false
