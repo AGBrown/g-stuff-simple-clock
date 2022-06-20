@@ -29,13 +29,33 @@ const handsConfigDefault = (): IClockHandsConfig => ({
   }
 });
 
+const getVersion = (setVersion: (ver: string) => void) => {
+  fetch('version.json', {
+    headers : {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json'
+     }
+  })
+  .then(function(response){
+    return response.json();
+  })
+  .then(function(versionData){
+    setVersion(versionData.version);
+  });
+};
+
 function App(props: { version: string }) {
+  const [ver, setVer] = useState(props.version);
   const [date, setDate] = useState(new Date(Date.now()).valueOf());
   const [expandTicks, setExpandTicks] = useState(false);
   const [rotateHands, setRotateHands] = useState(false);
   const [handsRotated, setHandsRotated] = useState(false);
   const [handsConfig, setHandsConfig] = useState(handsConfigDefault());
   const [ticksConfig, setTicksConfig] = useState(ticksConfigDefault());
+
+  useEffect(()=>{
+    getVersion(setVer);
+  },[])
 
   const buttonMutators = {
     setTicksConfig,
@@ -70,7 +90,7 @@ function App(props: { version: string }) {
     <div className="App">
       <ButtonsIncrements { ...clockProps } />
       <ClockFace { ...clockProps } />
-      <span className="version">{props.version}</span>
+      <span className="version">{ver}</span>
     </div>
   );
 }
