@@ -1,11 +1,13 @@
 import React from 'react';
 import moment from 'moment';
 import './App.css';
-import {
+import type {
   IClockTicksConfig,
   IClockHandsConfig,
   IClockTicksShowConfig,
-  IClockTicksShowConfigKeys
+} from './types/ClockFaceTypes';
+import {
+  mergeTicksConfig,
 } from './types/ClockFaceTypes';
 
 type IButtonsIncrementsProps = {
@@ -44,22 +46,15 @@ function ButtonsIncrements(props: IButtonsIncrementsProps) {
     { name: 'rndMin', label: 'r', onClick: setRndMin, value: 0 }
   ];
 
-  const updateTicksConfig = (newConfig: Partial<IClockTicksShowConfig>) => {
-    props.stateMutators.setTicksConfig({
-      ...props.ticksConfig,
-      show: {
-        ...props.ticksConfig.show,
-        ...newConfig
-      }
-    });
-  };
-
-  const getCheckData = (k: keyof IClockTicksShowConfig, label: string) =>({
+  const getCheckData = (k: keyof IClockTicksShowConfig, label: string) => ({
     name: k, label, id: `chkShow_${k}`,
     checked: props.ticksConfig.show[k],
-    value: (newValue: boolean) => ({ [k]: newValue })
+    onChange: (x: boolean) => {
+      var newConfig = mergeTicksConfig(props.ticksConfig, { [k]: x });
+      props.stateMutators.setTicksConfig(newConfig);
+    }
   });
-  const checks= [
+  const checks = [
     getCheckData('min5Label', 'm5'),
     getCheckData('minLabel', 'm'),
     getCheckData('minTicks', 'mt'),
@@ -70,11 +65,11 @@ function ButtonsIncrements(props: IButtonsIncrementsProps) {
   return (
     <div className="clock-width button-container">
       <div>
-        {checks.map(({ name, label, value, id, checked }) => (
+        {checks.map(({ name, label, onChange, id, checked }) => (
           <span key={name}>
             <input type="checkbox" id={id} name={id}
               checked={checked}
-              onChange={e => updateTicksConfig(value(e.target.checked))} />
+              onChange={e => onChange(e.target.checked)} />
             <label className="chkLabel" htmlFor={id}>{label}</label>
           </span>
         ))}

@@ -18,3 +18,19 @@ export type IClockTicksConfig = {
   show: IClockTicksShowConfig
 }
 
+const mergeTicksConfig = (
+  ticksConfig: IClockTicksConfig,
+  newConfig: Partial<IClockTicksShowConfig>) => {
+  return {
+    ...ticksConfig,
+    show: {
+      ...ticksConfig.show,
+      ...newConfig
+    }
+  };
+};
+
+export {
+  mergeTicksConfig
+}
+
