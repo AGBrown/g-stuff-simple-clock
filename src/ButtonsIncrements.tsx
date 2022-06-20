@@ -83,7 +83,7 @@ function ButtonsIncrements(props: IButtonsIncrementsProps) {
   ];
 
   return (
-    <div className="clock-width button-container">
+    <div className="button-container">
       <div>
         {checks.map(({ name, label, onChange, id, checked }) => (
           <span key={name}>
