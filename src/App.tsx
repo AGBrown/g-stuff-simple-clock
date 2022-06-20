@@ -37,18 +37,20 @@ function App(props: { msg: string }) {
   const [handsConfig, setHandsConfig] = useState(handsConfigDefault());
   const [ticksConfig, setTicksConfig] = useState(ticksConfigDefault());
 
+  const buttonMutators = {
+    setTicksConfig,
+    setHandsConfig
+  };
+
   const clockProps = {
     handsConfig,
     ticksConfig,
     date,
+    setDate,
     expandTicks,
     rotateHands,
-    handsRotated
-  };
-
-  const buttonMutators = {
-    setTicksConfig,
-    setHandsConfig
+    handsRotated,
+    stateMutators: buttonMutators
   };
 
   useEffect(() => {
@@ -69,7 +71,7 @@ function App(props: { msg: string }) {
       <header>
           {props.msg}
       </header>
-      <ButtonsIncrements { ...{ date, setDate, ticksConfig, stateMutators: buttonMutators } } />
+      <ButtonsIncrements { ...clockProps } />
       <ClockFace { ...clockProps } />
     </div>
   );

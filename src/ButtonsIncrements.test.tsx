@@ -15,6 +15,12 @@ const getProps = () => ({
       hourTicks: false,
     }
   },
+  handsConfig: {
+    jump: {
+      min: true,
+      hour: false
+    }
+  },
   stateMutators: {
     setTicksConfig: (ticksConfig: IClockTicksConfig) => {},
     setHandsConfig: (handsConfig: IClockHandsConfig) => {}
