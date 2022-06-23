@@ -112,9 +112,11 @@ function ClockFace(props: IClockFaceProps) {
      };
   });
 
+  var cnClockFace = props.ticksConfig.show.pastTo ? ['past-to-bg'] : [];
+
   return (
     <div className="clock">
-      <div className="clock-face">
+      <div className={["clock-face", ...cnClockFace].join(' ')}>
         <div className="minutes">
           {tickMarksData.map(x =>
             <div key={`${x.i}`}

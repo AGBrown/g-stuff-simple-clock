@@ -197,3 +197,8 @@ body {
 .button-container {
   z-index: 1000;
 }
+
+.past-to-bg {
+  border-radius: 50%;
+  background: linear-gradient(.25turn, #320b86 50%, #a00037 50%) no-repeat;
+}
