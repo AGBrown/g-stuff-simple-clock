@@ -22,6 +22,7 @@ export type IClockTicksShowConfig = {
   min5Label: boolean,
   minLabel: boolean,
   minTicks: boolean,
+  pastTo: boolean,
   hourLabel: boolean,
   hourTicks: boolean
 }

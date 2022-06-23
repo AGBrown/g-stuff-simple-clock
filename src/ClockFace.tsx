@@ -107,7 +107,7 @@ function ClockFace(props: IClockFaceProps) {
       minLabelTransformStyles,
       labels: {
         hr: hrLabel,
-        min: i
+        min: i < 31 ? i : props.ticksConfig.show.pastTo ? 60 - i : i
       }
      };
   });
