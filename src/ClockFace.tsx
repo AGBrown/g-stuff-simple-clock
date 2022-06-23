@@ -112,7 +112,7 @@ function ClockFace(props: IClockFaceProps) {
      };
   });
 
-  var cnClockFace = props.ticksConfig.show.pastTo ? ['past-to-bg'] : [];
+  var cnClockFace = props.ticksConfig.show.pastTo && props.ticksConfig.show.minTicks ? ['past-to-bg'] : [];
 
   return (
     <div className="clock">
@@ -137,8 +137,14 @@ function ClockFace(props: IClockFaceProps) {
             </div>
           )}
         </div>
-        <div className="date-container">
-          <p className="date">{displayDate}</p>
+        <div className="past-container clock-label-container">
+          <p className="label">past</p>
+        </div>
+        <div className="to-container clock-label-container">
+          <p className="label">to</p>
+        </div>
+        <div className="date-container clock-label-container">
+          <p className="label">{displayDate}</p>
         </div>
 
         {[handsData.map(x =>
