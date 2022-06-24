@@ -5,7 +5,7 @@
   --boldwidth: 2;
 
   --tickwidth: 2%;
-  --tickheight: 50%;
+  --tickheight: 49%;
 
   --handwidth: 1.2%;
   --handheight: 50%;
@@ -13,7 +13,7 @@
   --secondwidth: 0.5%;
   --secondheight: 60%;
 
-  --minuteheight: 45%;
+  --minuteheight: 44%;
 
   --hourheight: 25%;
 
@@ -77,6 +77,7 @@ body {
   height: var(--tickheight);
   position: absolute;
   left: calc(50% - var(--tickwidth) / 2);
+  bottom: 50%;
   transform-origin: 50% 100%;
   transition: all 2s;
   /*background-color: #DD8888;*/
@@ -105,7 +106,6 @@ body {
 .tickmark-label.label-min {
   position:absolute;
   top:50%;
-  left:50%;
   margin-top:-50px;
   margin-left:-0.25em;
   transform: rotate(90deg);
@@ -169,14 +169,27 @@ body {
   border-radius: 50%;
 }
 
-.date-container {
-  height: 100%;
+.clock-label-container {
   position: absolute;
-  right: 15%;
   display: flex;
 }
 
-.date-container .date {
+.past-container {
+  height: 75%;
+  right: 35%;
+}
+
+.to-container {
+  height: 75%;
+  left: 35%;
+}
+
+.date-container {
+  height: 100%;
+  right: 15%;
+}
+
+.clock-label-container .label {
   position: relative;
   color: #ccc;
   margin: auto;
@@ -196,4 +209,9 @@ body {
 
 .button-container {
   z-index: 1000;
+}
+
+.past-to-bg {
+  border-radius: 50%;
+  background: linear-gradient(.25turn, #00695C 50%, #C51162 50%) no-repeat;
 }

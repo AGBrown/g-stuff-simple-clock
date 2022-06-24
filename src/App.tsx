@@ -9,6 +9,7 @@ const ticksConfigDefault = (): IClockTicksConfig => ({
     min5Label: false,
     minLabel: false,
     minTicks: true,
+    pastTo: false,
     hourLabel: false,
     hourTicks: true,
   }
@@ -18,6 +19,7 @@ const ticksConfigFinal = (): IClockTicksConfig => ({
     min5Label: false,
     minLabel: false,
     minTicks: true,
+    pastTo: false,
     hourLabel: false,
     hourTicks: true
   }

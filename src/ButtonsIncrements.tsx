@@ -77,6 +77,7 @@ function ButtonsIncrements(props: IButtonsIncrementsProps) {
     getCheckData('min5Label', 'm5'),
     getCheckData('minLabel', 'm'),
     getCheckData('minTicks', 'mt'),
+    getCheckData('pastTo', 'p/t'),
     getCheckData('hourLabel', 'h'),
     getCheckData('hourTicks', 'ht'),
     getCheckDataHands('hour', 'hhj')

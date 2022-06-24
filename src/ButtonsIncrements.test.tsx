@@ -11,6 +11,7 @@ const getProps = () => ({
       min5Label: false,
       minLabel: false,
       minTicks: true,
+      pastTo: false,
       hourLabel: false,
       hourTicks: false,
     }

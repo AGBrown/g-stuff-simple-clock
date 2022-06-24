@@ -107,14 +107,16 @@ function ClockFace(props: IClockFaceProps) {
       minLabelTransformStyles,
       labels: {
         hr: hrLabel,
-        min: i
+        min: i < 31 ? i : props.ticksConfig.show.pastTo ? 60 - i : i
       }
      };
   });
 
+  var cnClockFace = props.ticksConfig.show.pastTo && props.ticksConfig.show.minTicks ? ['past-to-bg'] : [];
+
   return (
     <div className="clock">
-      <div className="clock-face">
+      <div className={["clock-face", ...cnClockFace].join(' ')}>
         <div className="minutes">
           {tickMarksData.map(x =>
             <div key={`${x.i}`}
@@ -135,8 +137,14 @@ function ClockFace(props: IClockFaceProps) {
             </div>
           )}
         </div>
-        <div className="date-container">
-          <p className="date">{displayDate}</p>
+        <div className="past-container clock-label-container">
+          <p className="label">past</p>
+        </div>
+        <div className="to-container clock-label-container">
+          <p className="label">to</p>
+        </div>
+        <div className="date-container clock-label-container">
+          <p className="label">{displayDate}</p>
         </div>
 
         {[handsData.map(x =>
