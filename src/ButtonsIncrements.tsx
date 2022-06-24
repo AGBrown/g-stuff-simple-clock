@@ -1,6 +1,6 @@
 import React from 'react';
 import moment from 'moment';
-import './App.css';
+import './ButtonsIncrements.css';
 import {
   IClockTicksConfig,
   IClockHandsConfig,
@@ -11,6 +11,8 @@ import {
   mergeHandsConfig,
   mergeTicksConfig,
 } from './types/ClockFaceTypes';
+import Icon from '@mdi/react';
+import { mdiPlus, mdiMinus, mdiAxisXRotateClockwise } from '@mdi/js';
 
 type IButtonsIncrementsProps = {
   date: number;
@@ -40,13 +42,19 @@ function ButtonsIncrements(props: IButtonsIncrementsProps) {
   const setRndHr = (_: number) => setNewDate(m => m.hour(Math.floor(Math.random() * 24)));
   const setRndMin = (_: number) => setNewDate(m => m.minute(Math.floor(Math.random() * 60)));
 
+  const ic = {
+    '-': <Icon path={mdiMinus} size={1} />,
+    '+': <Icon path={mdiPlus} size={1} />,
+    'r': <Icon path={mdiAxisXRotateClockwise} size={1} />,
+  }
+  type icKeys = keyof typeof ic;
   const buttons= [
-    { name: 'decHr', label: '-', onClick: changeHr, value: -1 },
-    { name: 'incHr', label: '+', onClick: changeHr, value: 1 },
-    { name: 'rndHr', label: 'r', onClick: setRndHr, value: 0 },
-    { name: 'decMin', label: '-', onClick: changeMin, value: -1 },
-    { name: 'incMin', label: '+', onClick: changeMin, value: 1 },
-    { name: 'rndMin', label: 'r', onClick: setRndMin, value: 0 }
+    { name: 'decHr', label: '-' as icKeys, onClick: changeHr, value: -1 },
+    { name: 'incHr', label: '+' as icKeys, onClick: changeHr, value: 1 },
+    { name: 'rndHr', label: 'r' as icKeys, onClick: setRndHr, value: 0 },
+    { name: 'decMin', label: '-' as icKeys, onClick: changeMin, value: -1 },
+    { name: 'incMin', label: '+' as icKeys, onClick: changeMin, value: 1 },
+    { name: 'rndMin', label: 'r' as icKeys, onClick: setRndMin, value: 0 }
   ];
 
   const getCheckDataHands = (k: keyof IClockHandsJumpConfig, label: string) => ({
@@ -75,7 +83,7 @@ function ButtonsIncrements(props: IButtonsIncrementsProps) {
   ];
 
   return (
-    <div className="clock-width button-container">
+    <div className="button-container">
       <div>
         {checks.map(({ name, label, onChange, id, checked }) => (
           <span key={name}>
@@ -88,8 +96,8 @@ function ButtonsIncrements(props: IButtonsIncrementsProps) {
       </div>
       <div>
         {buttons.map(({ name, label, onClick, value }) => (
-          <button key={name} className={`btn btn-${name}`} onClick={() => onClick(value)}>
-            {label}
+          <button key={name} id={name} className={`btn btn-${name}`} onClick={() => onClick(value)}>
+            {ic[label]}
           </button>
         ))}
       </div>

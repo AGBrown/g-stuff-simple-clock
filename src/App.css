@@ -1,5 +1,5 @@
 :root {
-  --clocksize: 90vh;
+  --clocksize: 70vh;
 
   --tickmarkwidth: 18%;
   --boldwidth: 2;
@@ -38,6 +38,10 @@ body {
   justify-content: center;
 }
 
+.version {
+  color:#999;
+}
+
 /*--- Clock Face ---*/
 
 .clock-width {
@@ -56,6 +60,8 @@ body {
   border-radius: 50%;
   margin: auto;
   position: relative;
+  padding-top:4em;
+  padding-bottom:4em;
 }
 
 .clock-face {

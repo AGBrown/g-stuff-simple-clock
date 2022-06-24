@@ -4,6 +4,8 @@
   "homepage": "https://agbrown.github.io/g-stuff-simple-clock",
   "private": true,
   "dependencies": {
+    "@mdi/js": "^6.7.96",
+    "@mdi/react": "^1.6.0",
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^13.3.0",
     "@testing-library/user-event": "^13.5.0",
@@ -19,8 +21,8 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "predeploy": "npm run build",
-    "deploy": "$VER=\"$(git describe)\"; echo $VER; npx gh-pages -d build -m \"$(git describe)\"; git fetch origin gh-pages;",
+    "predeploy": "ls; $VER=\"$(git describe)\"; echo $VER; pushd public; ls; $fc=(gc version.json); echo $fc; $fc.Replace('version not-set', $VER) > version.json; popd; npm run build",
+    "deploy": "npx gh-pages -d build -m \"$(git describe)\"; git fetch origin gh-pages;",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
