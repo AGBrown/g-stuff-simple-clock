@@ -8,10 +8,18 @@ const getProps = () => ({
   setDate: (date: number) => { },
   ticksConfig: {
     show: {
-      min: false,
-      min5: false,
-      hour: false,
+      min5Label: false,
+      minLabel: false,
+      minTicks: true,
+      pastTo: false,
+      hourLabel: false,
       hourTicks: false,
+    }
+  },
+  handsConfig: {
+    jump: {
+      min: true,
+      hour: false
     }
   },
   stateMutators: {
@@ -23,6 +31,7 @@ const getProps = () => ({
 test('todo', () => {
   const props = getProps();
   render(<ButtonsIncrements {...props} />);
-  const es = screen.getAllByText(/-/i);
-  es.forEach(e => expect(e).toBeInTheDocument());
+
+  const e = screen.getByText((_, e) => new RegExp('decHr').test(e?.getAttribute('id') ?? ""));
+  expect(e).toBeInTheDocument();
 });
