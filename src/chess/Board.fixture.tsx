@@ -10,6 +10,7 @@ const variations = {
   simple0: () => BoardFactory(0, 0),
   simple1: () => BoardFactory(1, 0),
   simple2: () => BoardFactory(2, 0),
+  simple8: () => BoardFactory(0, 1),
 }
 
 export default variations;
