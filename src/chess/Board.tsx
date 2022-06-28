@@ -6,15 +6,11 @@ import BoardSquare from './BoardSquare';
 import Knight from "./Knight";
 import './Board.css';
 import { canMoveKnight } from './logic/Game';
+import type { KnightState, SetValue } from './types/Game';
 
-export type KnightPosition = [x: number, y: number];
-export type KnightState = {
-  ki: number,
-  setKi: (i: number) => void
-};
 export type BoardProps = {} & KnightState;
 
-function renderSquare(i: number, ki: number, setKi: (i: number) => void) {
+function renderSquare(i: number, ki: number, setKi: SetValue<number>) {
   const renderPiece = (i: number, ki: number) => (i === ki) ? <Knight /> : undefined;
 
   return (
