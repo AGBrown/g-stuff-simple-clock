@@ -1,8 +1,12 @@
+import { useValue } from "react-cosmos/fixture";
 import Board from "./Board";
 
+const numOrZero = (i?: number) => i === undefined ? 0 : i;
 function BoardFactory(x?: number, y?: number) {
-  var kp = [x === undefined ? 0 : x, y === undefined ? 0 : y] as [number, number];
-  return <Board knightPosition={kp} />;
+  const kx = numOrZero(x);
+  const ky = numOrZero(y);
+  const [ki, setKi] = useValue('ki', { defaultValue: (ky * 8 + kx) as number });
+  return <Board { ...{ ki, setKi } } />;
 }
 
 const variations = {
