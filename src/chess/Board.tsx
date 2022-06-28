@@ -2,12 +2,14 @@ import React from 'react'
 import Square from "./Square";
 import Knight from "./Knight";
 import './Board.css';
+import { canMoveKnight, getKp } from './logic/Game';
 
 export type KnightPosition = [x: number, y: number];
-export type BoardProps = {
+export type KnightState = {
   ki: number,
   setKi: (i: number) => void
 };
+export type BoardProps = {} & KnightState;
 
 function renderSquare(i: number, [knightX, knightY]: KnightPosition, setKi: (i: number) => void) {
   const x = i % 8;
@@ -23,17 +25,16 @@ function renderSquare(i: number, [knightX, knightY]: KnightPosition, setKi: (i: 
   );
 }
 
-function getKp(ki: number) {
-  const x = ki % 8;
-  const y = (ki - x) / 8;
-  return [x, y] as [number, number];
+const handleMoveFactory = ({ki, setKi}: KnightState) => (to: number) => {
+  if (canMoveKnight(ki, to)) setKi(to);
 }
 
 function Board(props: BoardProps) {
   const { ki, setKi } = props;
+  const handleMove = handleMoveFactory({ki, setKi});
   const squares = [];
   for (let i = 0; i < 64; i++) {
-    squares.push(renderSquare(i, getKp(ki), setKi));
+    squares.push(renderSquare(i, getKp(ki), handleMove));
   }
   return (
     <div className="board">
