@@ -1,6 +1,6 @@
 import React from 'react';
-import './App.css';
-import { IClockHandsConfig, IClockTicksConfig } from './types/ClockFaceTypes';
+import './ClockFace.css';
+import { IClockHandsConfig, IClockTicksConfig } from '../types/ClockFaceTypes';
 
 type IClockFaceProps = {
   handsConfig: IClockHandsConfig;

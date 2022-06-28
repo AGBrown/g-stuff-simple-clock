@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import ButtonsIncrements from './ButtonsIncrements';
-import { IClockHandsConfig, IClockTicksConfig } from './types/ClockFaceTypes';
+import { IClockHandsConfig, IClockTicksConfig } from '../types/ClockFaceTypes';
 
 const getProps = () => ({
   date: new Date(Date.now()).valueOf(),

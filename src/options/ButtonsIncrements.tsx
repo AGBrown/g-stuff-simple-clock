@@ -6,11 +6,11 @@ import {
   IClockHandsConfig,
   IClockTicksShowConfig,
   IClockHandsJumpConfig,
-} from './types/ClockFaceTypes';
+} from '../types/ClockFaceTypes';
 import {
   mergeHandsConfig,
   mergeTicksConfig,
-} from './types/ClockFaceTypes';
+} from '../types/ClockFaceTypes';
 import Icon from '@mdi/react';
 import { mdiPlus, mdiMinus, mdiAxisXRotateClockwise } from '@mdi/js';
 
