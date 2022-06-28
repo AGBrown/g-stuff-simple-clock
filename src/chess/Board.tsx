@@ -1,4 +1,7 @@
 import React from 'react'
+import { DndProvider } from 'react-dnd'
+import { HTML5Backend } from 'react-dnd-html5-backend'
+
 import Square from "./Square";
 import Knight from "./Knight";
 import './Board.css';
@@ -34,14 +37,17 @@ const handleMoveFactory = ({ki, setKi}: KnightState) => (to: number) => {
 function Board(props: BoardProps) {
   const { ki, setKi } = props;
   const handleMove = handleMoveFactory({ki, setKi});
+
   const squares = [];
   for (let i = 0; i < 64; i++) {
     squares.push(renderSquare(i, ki, handleMove));
   }
   return (
-    <div className="board">
-      {squares}
-    </div>
+    <DndProvider backend={HTML5Backend}>
+      <div className="board">
+        {squares}
+      </div>
+    </DndProvider>
   )
 }
 

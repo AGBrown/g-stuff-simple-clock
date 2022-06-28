@@ -1,10 +1,16 @@
+import { DndProvider } from "react-dnd";
+import { HTML5Backend } from "react-dnd-html5-backend";
 import Knight from "./Knight";
 import Square from "./Square";
 
 function FixtureFactory({black, knight}: {black: boolean, knight: boolean}) {
-  return <Square black={black}>
-    {knight && <Knight />}
-    </Square>;
+  return (
+    <DndProvider backend={HTML5Backend}>
+      <Square black={black}>
+        {knight && <Knight />}
+      </Square>
+    </DndProvider>
+  );
 }
 
 const variations = {
