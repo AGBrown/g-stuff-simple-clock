@@ -2,10 +2,10 @@ import React from 'react'
 import { DndProvider } from 'react-dnd'
 import { HTML5Backend } from 'react-dnd-html5-backend'
 
-import Square from "./Square";
+import BoardSquare from './BoardSquare';
 import Knight from "./Knight";
 import './Board.css';
-import { canMoveKnight, getXY } from './logic/Game';
+import { canMoveKnight } from './logic/Game';
 
 export type KnightPosition = [x: number, y: number];
 export type KnightState = {
@@ -15,16 +15,15 @@ export type KnightState = {
 export type BoardProps = {} & KnightState;
 
 function renderSquare(i: number, ki: number, setKi: (i: number) => void) {
-  const isKnightHere = i === ki;
-  const [x, y] = getXY(i);
-  const black = (x + y) % 2 === 1;
-  const piece = isKnightHere ? <Knight /> : null;
+  const renderPiece = (i: number, ki: number) => (i === ki) ? <Knight /> : undefined;
 
   return (
     <div key={i} className="board-square-container">
       <div className="board-droptarget"
         onClick={() => setKi(i)}>
-        <Square black={black}>{piece}</Square>
+        <BoardSquare { ...{ i } }>
+          {renderPiece(i, ki)}
+        </BoardSquare>
       </div>
     </div>
   );
