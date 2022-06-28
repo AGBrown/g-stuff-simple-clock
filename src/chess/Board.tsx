@@ -2,7 +2,7 @@ import React from 'react'
 import Square from "./Square";
 import Knight from "./Knight";
 import './Board.css';
-import { canMoveKnight, getKp } from './logic/Game';
+import { canMoveKnight, getXY } from './logic/Game';
 
 export type KnightPosition = [x: number, y: number];
 export type KnightState = {
@@ -11,10 +11,9 @@ export type KnightState = {
 };
 export type BoardProps = {} & KnightState;
 
-function renderSquare(i: number, [knightX, knightY]: KnightPosition, setKi: (i: number) => void) {
-  const x = i % 8;
-  const y = Math.floor(i / 8);
-  const isKnightHere = x === knightX && y === knightY;
+function renderSquare(i: number, ki: number, setKi: (i: number) => void) {
+  const isKnightHere = i === ki;
+  const [x, y] = getXY(i);
   const black = (x + y) % 2 === 1;
   const piece = isKnightHere ? <Knight /> : null;
 
@@ -43,7 +42,7 @@ function Board(props: BoardProps) {
   const handleMove = handleMoveFactory({ki, setKi});
   const squares = [];
   for (let i = 0; i < 64; i++) {
-    squares.push(renderSquare(i, getKp(ki), handleMove));
+    squares.push(renderSquare(i, ki, handleMove));
   }
   return (
     <div className="board">

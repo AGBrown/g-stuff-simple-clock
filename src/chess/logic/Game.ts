@@ -1,14 +1,14 @@
 
 
-function getKp(ki: number) {
+function getXY(ki: number) {
   const x = ki % 8;
   const y = (ki - x) / 8;
   return [x, y] as [number, number];
 }
 
 function canMoveKnight(from: number, to: number) {
-  const [x, y] = getKp(from);
-  const [toX, toY] = getKp(to);
+  const [x, y] = getXY(from);
+  const [toX, toY] = getXY(to);
   const dx = toX - x;
   const dy = toY - y;
 
@@ -19,6 +19,6 @@ function canMoveKnight(from: number, to: number) {
 }
 
 export {
-  getKp,
+  getXY,
   canMoveKnight
 }
