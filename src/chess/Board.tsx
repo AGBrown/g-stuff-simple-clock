@@ -6,31 +6,30 @@ import BoardSquare from './BoardSquare';
 import Knight from "./Knight";
 import './Board.css';
 import { canMoveKnight } from './logic/Game';
-import type { KnightState, SetValue } from './types/Game';
+import type { SetValue } from './types/Game';
 
-export type BoardProps = {} & KnightState;
+export type BoardProps = {
+  ki: number,
+  setKi: SetValue<number>
+};
 
-function renderSquare(i: number, ki: number, setKi: SetValue<number>) {
+function renderSquare(i: number, ki: number, moveKnight: SetValue<number>) {
   const renderPiece = (i: number, ki: number) => (i === ki) ? <Knight /> : undefined;
 
   return (
     <div key={i} className="board-square-container">
-      <div className="board-droptarget"
-        onClick={() => setKi(i)}>
-        <BoardSquare { ...{ i } }>
-          {renderPiece(i, ki)}
-        </BoardSquare>
-      </div>
+      <BoardSquare { ...{ i, ki, moveKnight } }>
+        {renderPiece(i, ki)}
+      </BoardSquare>
     </div>
   );
 }
 
-const handleMoveFactory = ({ki, setKi}: KnightState) => (to: number) => {
+const handleMoveFactory = ({ki, setKi}: BoardProps) => (to: number) => {
   if (canMoveKnight(ki, to)) setKi(to);
 }
 
-function Board(props: BoardProps) {
-  const { ki, setKi } = props;
+function Board({ki, setKi}: BoardProps) {
   const handleMove = handleMoveFactory({ki, setKi});
 
   const squares = [];
