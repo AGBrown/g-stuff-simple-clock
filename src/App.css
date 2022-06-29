@@ -213,5 +213,5 @@ body {
 
 .past-to-bg {
   border-radius: 50%;
-  background: linear-gradient(.25turn, #00695C 50%, #C51162 50%) no-repeat;
+  background: linear-gradient(.25turn, #00695C 49.5%, #C51162 49.5%) no-repeat;
 }

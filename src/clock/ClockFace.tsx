@@ -1,6 +1,6 @@
 import React from 'react';
-import './App.css';
-import { IClockHandsConfig, IClockTicksConfig } from './types/ClockFaceTypes';
+import './ClockFace.css';
+import { IClockHandsConfig, IClockTicksConfig } from '../types/ClockFaceTypes';
 
 type IClockFaceProps = {
   handsConfig: IClockHandsConfig;
@@ -112,7 +112,8 @@ function ClockFace(props: IClockFaceProps) {
      };
   });
 
-  var cnClockFace = props.ticksConfig.show.pastTo && props.ticksConfig.show.minTicks ? ['past-to-bg'] : [];
+  const showPastTo = props.ticksConfig.show.pastTo && props.ticksConfig.show.minTicks;
+  const cnClockFace = showPastTo ? ['past-to-bg'] : [];
 
   return (
     <div className="clock">
@@ -137,12 +138,16 @@ function ClockFace(props: IClockFaceProps) {
             </div>
           )}
         </div>
-        <div className="past-container clock-label-container">
-          <p className="label">past</p>
-        </div>
-        <div className="to-container clock-label-container">
-          <p className="label">to</p>
-        </div>
+        {showPastTo && (
+          <>
+            <div className="past-container clock-label-container">
+              <p className="label">past</p>
+            </div>
+            <div className="to-container clock-label-container">
+              <p className="label">to</p>
+            </div>
+          </>
+        )}
         <div className="date-container clock-label-container">
           <p className="label">{displayDate}</p>
         </div>

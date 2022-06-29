@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './App.css';
-import ButtonsIncrements from './ButtonsIncrements';
-import ClockFace from './ClockFace';
+import ButtonsIncrements from './options/ButtonsIncrements';
+import ClockFace from './clock/ClockFace';
 import { IClockHandsConfig, IClockTicksConfig, mergeTicksConfig } from './types/ClockFaceTypes';
 
 const ticksConfigDefault = (): IClockTicksConfig => ({
