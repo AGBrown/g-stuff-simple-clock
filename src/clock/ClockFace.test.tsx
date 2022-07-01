@@ -34,8 +34,8 @@ test('renders minute marks', () => {
   };
   render(<ClockFace {...props} />);
   [...Array(60)].forEach((_, x) => {
-    const e = screen.getByText((_, e) => e?.getAttribute('data-minute') === `${x}`);
-    expect(e).toBeInTheDocument();
+    const es = screen.getAllByText((_, e) => new RegExp(`tick-radius`).test(e?.getAttribute('class') ?? ""));
+    expect(es[0]).toBeInTheDocument();
   });
 });
 
