@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import type { IClockHandsConfig, IClockHandsProps } from './Hands';
+import type { IClockHandsProps } from './Hands';
 import Hands from './Hands';
 
 const getHandsProps = (): IClockHandsProps => ({
