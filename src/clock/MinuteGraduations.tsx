@@ -78,13 +78,13 @@ function MinuteGraduations(props: IClockFaceProps) {
         <div key={`${x.i}`}
               className={toClassString("gradn-frame", ...x.gradnClassNames)}
               style={{ ...x.transformStyles }}>
-          <div className="gradnmark">
+          <div className="gradn">
             { shouldShow.labels.min(x.i, props)
-                && <span className="gradnmark-label label-min"
+                && <span className="gradn-label label-min"
                     style={{ ...x.minLabelTransformStyles }}
                   >{x.labels.min}</span> }
             { shouldShow.labels.hour(x.i, props)
-                && <span className="gradnmark-label label-hour"
+                && <span className="gradn-label label-hour"
                     style={{ ...x.minLabelTransformStyles }}>
                     {x.labels.hr}
                   </span> }

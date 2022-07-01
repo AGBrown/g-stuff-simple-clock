@@ -9,27 +9,27 @@
   /*background-color: #DD8888;*/
 }
 
-.graduations .gradnmark {
-  width: var(--gradnmarkwidth);
+.graduations .gradn {
+  width: var(--gradnwidth);
   height: 8%;
   position: relative;
   background-color: #555;
   margin: auto;
 }
 
-.gradn-hour .gradnmark {
-  width: calc(var(--gradnmarkwidth) * var(--boldwidth));
+.gradn-hour .gradn {
+  width: calc(var(--gradnwidth) * var(--boldwidth));
   background-color: #fff;
 }
 
-.gradn-hide .gradnmark {
+.gradn-hide .gradn {
   display: none;
 }
 
-.gradnmark-label {
+.gradn-label {
   color: #aaa;
 }
-.gradnmark-label.label-min {
+.gradn-label.label-min {
   position:absolute;
   top:50%;
   margin-top:-50px;
@@ -37,7 +37,7 @@
   transform: rotate(90deg);
   text-align: center;
 }
-.gradnmark-label.label-hour {
+.gradn-label.label-hour {
   color: #eee;
   position:absolute;
   top:50%;
