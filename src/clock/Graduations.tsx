@@ -43,11 +43,8 @@ const shouldShowFactory = () => {
 };
 const shouldShow = shouldShowFactory();
 
-const toClassString = (...xs: string[]) => xs.join(' ');
-
-function Graduations(props: IClockFaceProps) {
-
-  var gradnsMinsData = [...Array(60)].map((_, i) => {
+const getGradnsData = (props: IClockFaceProps) =>
+  [...Array(60)].map((_, i) => {
     const degrees = i / 60 * 360;
     const transformStyles = !props.expandGradns ? {} : {
       transform: `rotate(${degrees}deg)`
@@ -70,12 +67,17 @@ function Graduations(props: IClockFaceProps) {
         hr: hrLabel,
         min: i < 31 ? i : props.gradnsConfig.show.pastTo ? 60 - i : i
       }
-     };
+    };
   });
+
+const toClassString = (...xs: string[]) => xs.join(' ');
+
+function Graduations(props: IClockFaceProps) {
+  const gradnsData = getGradnsData(props);
 
   return (
     <div className="graduations">
-    {gradnsMinsData.map(x =>
+    {gradnsData.map(x =>
       <div key={`${x.i}`}
             className={toClassString("gradn-frame", ...x.gradnClassNamesMin)}
             style={{ ...x.transformStyles }}>
@@ -88,7 +90,7 @@ function Graduations(props: IClockFaceProps) {
         </div>
       </div>
     )}
-    {gradnsMinsData.filter(x => x.isHr).map(x =>
+    {gradnsData.filter(x => x.isHr).map(x =>
       <div key={`${x.i}`}
             className={toClassString("gradn-frame", ...x.gradnClassNamesHrs)}
             style={{ ...x.transformStyles }}>
