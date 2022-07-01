@@ -1,8 +1,8 @@
 .gradn-frame {
-  width: var(--gradnwidth);
+  width: var(--gradnframewidth);
   height: var(--gradnheight);
   position: absolute;
-  left: calc(50% - var(--gradnwidth) / 2);
+  left: calc(50% - var(--gradnframewidth) / 2);
   bottom: 50%;
   transform-origin: 50% 100%;
   transition: all 2s;
