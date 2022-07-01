@@ -51,11 +51,3 @@ body {
   margin-top:20px;
   color: #ccc;
 }
-
-.chkLabel {
-  color: #ccc;
-}
-
-.button-container {
-  z-index: 1000;
-}
