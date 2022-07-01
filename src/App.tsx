@@ -2,28 +2,28 @@ import React, { useEffect, useState } from 'react';
 import './App.css';
 import ButtonsIncrements from './options/ButtonsIncrements';
 import ClockFace from './clock/ClockFace';
-import { IClockTicksConfig, mergeTicksConfig } from './types/ClockFaceTypes';
+import { IClockGradnsConfig, mergeGradnsConfig } from './types/ClockFaceTypes';
 import type { IClockHandsConfig } from './clock/Hands';
 import { mergeHandsRotateConfig } from './clock/Hands';
 
-const ticksConfigDefault = (): IClockTicksConfig => ({
+const gradnsConfigDefault = (): IClockGradnsConfig => ({
   show: {
     min5Label: false,
     minLabel: false,
-    minTicks: true,
+    minGradns: true,
     pastTo: false,
     hourLabel: false,
-    hourTicks: true,
+    hourGradns: true,
   }
 });
-const ticksConfigFinal = (): IClockTicksConfig => ({
+const gradnsConfigFinal = (): IClockGradnsConfig => ({
   show: {
     min5Label: false,
     minLabel: false,
-    minTicks: true,
+    minGradns: true,
     pastTo: false,
     hourLabel: false,
-    hourTicks: true
+    hourGradns: true
   }
 });
 const handsConfigDefault = (): IClockHandsConfig => ({
@@ -55,38 +55,38 @@ const getVersion = (setVersion: (ver: string) => void) => {
 function App(props: { version: string }) {
   const [ver, setVer] = useState(props.version);
   const [date, setDate] = useState(new Date(Date.now()).valueOf());
-  const [expandTicks, setExpandTicks] = useState(false);
+  const [expandGradns, setExpandGradns] = useState(false);
   const [handsConfig, setHandsConfig] = useState(handsConfigDefault());
-  const [ticksConfig, setTicksConfig] = useState(ticksConfigDefault());
+  const [gradnsConfig, setGradnsConfig] = useState(gradnsConfigDefault());
 
   useEffect(()=>{
     getVersion(setVer);
   },[])
 
   const buttonMutators = {
-    setTicksConfig,
+    setGradnsConfig,
     setHandsConfig
   };
 
   const clockProps = {
     handsConfig,
-    ticksConfig,
+    gradnsConfig,
     date,
     setDate,
-    expandTicks,
+    expandGradns,
     stateMutators: buttonMutators
   };
 
   useEffect(() => {
     setTimeout(() => {
-      setExpandTicks(true);
+      setExpandGradns(true);
     }, 300);
     setTimeout(() => {
       setHandsConfig(c => mergeHandsRotateConfig(c, { isStarted: true }));
     }, 1000);
     setTimeout(() => {
       setHandsConfig(c => mergeHandsRotateConfig(c, { isComplete: true }));
-      setTicksConfig(t => mergeTicksConfig(t, ticksConfigFinal().show))
+      setGradnsConfig(t => mergeGradnsConfig(t, gradnsConfigFinal().show))
     }, 3000);
   }, []);
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import './ClockFace.css';
-import type { IClockTicksConfig, ITellsTime } from '../types/ClockFaceTypes';
+import type { IClockGradnsConfig, ITellsTime } from '../types/ClockFaceTypes';
 import type { IClockHandsConfig } from './Hands';
 import Hands from './Hands';
 import DateComplication from './DateComplication';
@@ -8,13 +8,13 @@ import MinuteGraduations from './MinuteGraduations';
 
 type IClockFaceProps = ITellsTime & {
   handsConfig: IClockHandsConfig;
-  ticksConfig: IClockTicksConfig;
-  expandTicks: boolean
+  gradnsConfig: IClockGradnsConfig;
+  expandGradns: boolean
 }
 
 function ClockFace(props: IClockFaceProps) {
 
-  const showPastTo = props.ticksConfig.show.pastTo && props.ticksConfig.show.minTicks;
+  const showPastTo = props.gradnsConfig.show.pastTo && props.gradnsConfig.show.minGradns;
   const cnClockFace = showPastTo ? ['past-to-bg'] : [];
 
   return (

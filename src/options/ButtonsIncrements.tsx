@@ -2,12 +2,12 @@ import React from 'react';
 import moment from 'moment';
 import './ButtonsIncrements.css';
 import type {
-  IClockTicksConfig,
-  IClockTicksShowConfig,
+  IClockGradnsConfig,
+  IClockGradnsShowConfig,
   IClockHandsJumpConfig,
 } from '../types/ClockFaceTypes';
 import {
-  mergeTicksConfig,
+  mergeGradnsConfig,
 } from '../types/ClockFaceTypes';
 import type { IClockHandsConfig } from '../clock/Hands'
 import { mergeHandsJumpConfig } from '../clock/Hands'
@@ -17,10 +17,10 @@ import { mdiPlus, mdiMinus, mdiAxisXRotateClockwise } from '@mdi/js';
 type IButtonsIncrementsProps = {
   date: number;
   setDate: (date: number) => void;
-  ticksConfig: IClockTicksConfig;
+  gradnsConfig: IClockGradnsConfig;
   handsConfig: IClockHandsConfig;
   stateMutators: {
-    setTicksConfig: (ticksConfig: IClockTicksConfig) => void;
+    setGradnsConfig: (gradnsConfig: IClockGradnsConfig) => void;
     setHandsConfig: (handsConfig: IClockHandsConfig) => void;
   }
 }
@@ -65,21 +65,21 @@ function ButtonsIncrements(props: IButtonsIncrementsProps) {
       props.stateMutators.setHandsConfig(newConfig);
     }
   });
-  const getCheckData = (k: keyof IClockTicksShowConfig, label: string) => ({
+  const getCheckData = (k: keyof IClockGradnsShowConfig, label: string) => ({
     name: k, label, id: `chkShow_${k}`,
-    checked: props.ticksConfig.show[k],
+    checked: props.gradnsConfig.show[k],
     onChange: (x: boolean) => {
-      var newConfig = mergeTicksConfig(props.ticksConfig, { [k]: x });
-      props.stateMutators.setTicksConfig(newConfig);
+      var newConfig = mergeGradnsConfig(props.gradnsConfig, { [k]: x });
+      props.stateMutators.setGradnsConfig(newConfig);
     }
   });
   const checks = [
     getCheckData('min5Label', 'm5'),
     getCheckData('minLabel', 'm'),
-    getCheckData('minTicks', 'mt'),
+    getCheckData('minGradns', 'mt'),
     getCheckData('pastTo', 'p/t'),
     getCheckData('hourLabel', 'h'),
-    getCheckData('hourTicks', 'ht'),
+    getCheckData('hourGradns', 'ht'),
     getCheckDataHands('hour', 'hhj')
   ];
 

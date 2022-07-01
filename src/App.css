@@ -1,11 +1,11 @@
 :root {
   --clocksize: 70vh;
 
-  --tickmarkwidth: 18%;
+  --gradnmarkwidth: 18%;
   --boldwidth: 2;
 
-  --tickwidth: 2%;
-  --tickheight: 49%;
+  --gradnwidth: 2%;
+  --gradnheight: 49%;
 
   --handwidth: 1.2%;
   --handheight: 50%;
@@ -70,40 +70,40 @@ body {
   position: relative;
 }
 
-/*--- Tickmarks ---*/
+/*--- Gradnmarks ---*/
 
-.tick-radius {
-  width: var(--tickwidth);
-  height: var(--tickheight);
+.gradn-radius {
+  width: var(--gradnwidth);
+  height: var(--gradnheight);
   position: absolute;
-  left: calc(50% - var(--tickwidth) / 2);
+  left: calc(50% - var(--gradnwidth) / 2);
   bottom: 50%;
   transform-origin: 50% 100%;
   transition: all 2s;
   /*background-color: #DD8888;*/
 }
 
-.minutes .tickmark {
-  width: var(--tickmarkwidth);
+.minutes .gradnmark {
+  width: var(--gradnmarkwidth);
   height: 8%;
   position: relative;
   background-color: #555;
   margin: auto;
 }
 
-.tick-hour .tickmark {
-  width: calc(var(--tickmarkwidth) * var(--boldwidth));
+.gradn-hour .gradnmark {
+  width: calc(var(--gradnmarkwidth) * var(--boldwidth));
   background-color: #fff;
 }
 
-.tick-hide .tickmark {
+.gradn-hide .gradnmark {
   display: none;
 }
 
-.tickmark-label {
+.gradnmark-label {
   color: #aaa;
 }
-.tickmark-label.label-min {
+.gradnmark-label.label-min {
   position:absolute;
   top:50%;
   margin-top:-50px;
@@ -111,7 +111,7 @@ body {
   transform: rotate(90deg);
   text-align: center;
 }
-.tickmark-label.label-hour {
+.gradnmark-label.label-hour {
   color: #eee;
   position:absolute;
   top:50%;

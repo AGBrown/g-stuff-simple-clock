@@ -10,22 +10,22 @@ const getHandsConfig = () => ({
   }
 });
 
-const getTicksConfig = () => ({
+const getGradnsConfig = () => ({
   show: {
     min5Label: true,
     minLabel: true,
-    minTicks: true,
+    minGradns: true,
     pastTo: false,
     hourLabel: true,
-    hourTicks: true
+    hourGradns: true
   }
 });
 
 const getClockProps = () => ( {
   handsConfig: getHandsConfig(),
-  ticksConfig: getTicksConfig(),
+  gradnsConfig: getGradnsConfig(),
   date: new Date(Date.now()).valueOf(),
-  expandTicks: false,
+  expandGradns: false,
 });
 
 test('renders minute marks', () => {
@@ -34,7 +34,7 @@ test('renders minute marks', () => {
   };
   render(<ClockFace {...props} />);
   [...Array(60)].forEach((_, x) => {
-    const es = screen.getAllByText((_, e) => new RegExp(`tick-radius`).test(e?.getAttribute('class') ?? ""));
+    const es = screen.getAllByText((_, e) => new RegExp(`gradn-radius`).test(e?.getAttribute('class') ?? ""));
     expect(es[0]).toBeInTheDocument();
   });
 });

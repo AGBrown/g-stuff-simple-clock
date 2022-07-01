@@ -7,32 +7,32 @@ export type IClockHandsJumpConfig = {
   hour: boolean
 }
 
-export type IClockTicksShowConfig = {
+export type IClockGradnsShowConfig = {
   min5Label: boolean,
   minLabel: boolean,
-  minTicks: boolean,
+  minGradns: boolean,
   pastTo: boolean,
   hourLabel: boolean,
-  hourTicks: boolean
+  hourGradns: boolean
 }
-export type IClockTicksShowConfigKeys = keyof IClockTicksShowConfig;
+export type IClockGradnsShowConfigKeys = keyof IClockGradnsShowConfig;
 
-export type IClockTicksConfig = {
-  show: IClockTicksShowConfig
+export type IClockGradnsConfig = {
+  show: IClockGradnsShowConfig
 }
 
-const mergeTicksConfig = (
-  ticksConfig: IClockTicksConfig,
-  newConfig: Partial<IClockTicksShowConfig>) => {
+const mergeGradnsConfig = (
+  gradnsConfig: IClockGradnsConfig,
+  newConfig: Partial<IClockGradnsShowConfig>) => {
   return {
-    ...ticksConfig,
+    ...gradnsConfig,
     show: {
-      ...ticksConfig.show,
+      ...gradnsConfig.show,
       ...newConfig
     }
   };
 };
 
 export {
-  mergeTicksConfig
+  mergeGradnsConfig
 }
