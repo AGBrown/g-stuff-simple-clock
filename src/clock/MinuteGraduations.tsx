@@ -47,24 +47,25 @@ const toClassString = (...xs: string[]) => xs.join(' ');
 
 function MinuteGraduations(props: IClockFaceProps) {
 
-  var gradnsData = [...Array(60)].map((_, i) => {
+  var gradnsMinsData = [...Array(60)].map((_, i) => {
     const degrees = i / 60 * 360;
     const transformStyles = !props.expandGradns ? {} : {
       transform: `rotate(${degrees}deg)`
     };
-    const minLabelTransformStyles = !props.expandGradns ? {} : {
+    const labelTransformStyles = !props.expandGradns ? {} : {
       transform: `rotate(-${degrees}deg)`
     };
-    const gradnClassNames =
-      shouldShow.gradns.hour(i, props) ? ["gradn-hour"]
-      : !shouldShow.gradns.min(i, props) ? ["gradn-hide"]
-      : [];
-    const hrLabel = (i % 5 === 0) ? (i === 0 ? 12 : i / 5) : "";
+    const gradnClassNamesMin = !shouldShow.gradns.min(i, props) ? ["gradn-hide"] : [];
+    const gradnClassNamesHrs = shouldShow.gradns.hour(i, props) ? ["gradn-hour"] : [];
+    const isHr = i % 5 === 0;
+    const hrLabel = isHr ? (i === 0 ? 12 : i / 5) : "";
     return {
       i,
       transformStyles,
-      gradnClassNames,
-      minLabelTransformStyles,
+      gradnClassNamesMin,
+      gradnClassNamesHrs,
+      labelTransformStyles,
+      isHr,
       labels: {
         hr: hrLabel,
         min: i < 31 ? i : props.gradnsConfig.show.pastTo ? 60 - i : i
@@ -74,23 +75,32 @@ function MinuteGraduations(props: IClockFaceProps) {
 
   return (
     <div className="graduations">
-      {gradnsData.map(x =>
-        <div key={`${x.i}`}
-              className={toClassString("gradn-frame", ...x.gradnClassNames)}
-              style={{ ...x.transformStyles }}>
-          <div className="gradn">
-            { shouldShow.labels.min(x.i, props)
-                && <span className="gradn-label label-min"
-                    style={{ ...x.minLabelTransformStyles }}
-                  >{x.labels.min}</span> }
-            { shouldShow.labels.hour(x.i, props)
-                && <span className="gradn-label label-hour"
-                    style={{ ...x.minLabelTransformStyles }}>
-                    {x.labels.hr}
-                  </span> }
-          </div>
+    {gradnsMinsData.map(x =>
+      <div key={`${x.i}`}
+            className={toClassString("gradn-frame", ...x.gradnClassNamesMin)}
+            style={{ ...x.transformStyles }}>
+        <div className="gradn">
+          { shouldShow.labels.min(x.i, props)
+              && <span className="gradn-label label-min"
+                  style={{ ...x.labelTransformStyles }}>
+                  {x.labels.min}
+                </span> }
         </div>
-      )}
+      </div>
+    )}
+    {gradnsMinsData.filter(x => x.isHr).map(x =>
+      <div key={`${x.i}`}
+            className={toClassString("gradn-frame", ...x.gradnClassNamesHrs)}
+            style={{ ...x.transformStyles }}>
+        <div className="gradn">
+          { shouldShow.labels.hour(x.i, props)
+              && <span className="gradn-label label-hour"
+                  style={{ ...x.labelTransformStyles }}>
+                  {x.labels.hr}
+                </span> }
+        </div>
+      </div>
+    )}
     </div>
   );
 }
