@@ -1,6 +1,7 @@
 import React from 'react';
 import './ClockFace.css';
 import { IClockHandsConfig, IClockTicksConfig } from '../types/ClockFaceTypes';
+import Hands from './Hands';
 
 type IClockFaceProps = {
   handsConfig: IClockHandsConfig;
@@ -10,24 +11,6 @@ type IClockFaceProps = {
   rotateHands: boolean,
   handsRotated: boolean,
 }
-
-function getDegrees(config: IClockHandsConfig, date: Date) {
-  const timeValues = {
-    second: date.getSeconds(),
-    min: date.getMinutes(),
-    hour: date.getHours()
-  };
-  const degrees = {
-    second: timeValues.second / 60 * 360,
-    min: config.jump.min
-      ? timeValues.min / 60 * 360
-      : (timeValues.min / 60 + timeValues.second / 60 / 60) * 360,
-    hour: config.jump.hour
-      ? timeValues.hour / 12 * 360
-      : (timeValues.hour / 12 + timeValues.min / 60 / 12 + timeValues.second / 60 / 60 / 12) * 360,
-  };
-  return degrees;
-};
 
 const shouldShowFactory = () => {
   const hour = (i: number, props: IClockFaceProps) => {
@@ -70,20 +53,6 @@ function ClockFace(props: IClockFaceProps) {
     month: "short",
     day: "numeric"
   });
-
-  var handNames = ["second", "min", "hour"];
-  // TODO: fix animations. Need to know old and new, and when cross the top need to add so you go above 360/below 0
-  var { second: sd, min: md, hour: hd } = getDegrees(props.handsConfig, date);
-  var handsData = handNames.map(x => ({
-    name: x,
-    degrees: x === "second" ? sd : x === "min" ? md : hd
-  })).map(x => ({
-    name: x.name,
-    transformStyles: {
-      transform: props.rotateHands ? `rotate(${x.degrees}deg)` : undefined,
-      transition: props.handsRotated ? "all 0.05s" : "all 2s"
-    },
-  }));
 
   var tickMarksData = [...Array(60)].map((_, i) => {
     const degrees = i / 60 * 360;
@@ -150,13 +119,7 @@ function ClockFace(props: IClockFaceProps) {
           <p className="label">{displayDate}</p>
         </div>
 
-        {[handsData.map(x =>
-          <div key={x.name} className={["hand-container", `${x.name}-face`].join(' ')}>
-            <div className={["hand", `${x.name}-hand`].join(' ')}
-              style={{ ...x.transformStyles }} />
-          </div>
-        )]}
-        <div className="center-peg"></div>
+        <Hands {...props} />
       </div>
     </div>
   );

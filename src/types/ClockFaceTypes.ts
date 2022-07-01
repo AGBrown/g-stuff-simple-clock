@@ -1,6 +1,11 @@
+export type ITellsTime = {
+  date: number
+}
+
 export type IClockHandsConfig = {
   jump: IClockHandsJumpConfig
 }
+
 export type IClockHandsJumpConfig = {
   min: boolean,
   hour: boolean
@@ -48,4 +53,3 @@ export {
   mergeHandsConfig,
   mergeTicksConfig
 }
-
