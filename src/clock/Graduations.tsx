@@ -1,5 +1,5 @@
 import React from 'react';
-import './MinuteGraduations.css';
+import './Graduations.css';
 import type { IClockGradnsConfig, ITellsTime } from '../types/ClockFaceTypes';
 import type { IClockHandsConfig } from './Hands';
 
@@ -45,7 +45,7 @@ const shouldShow = shouldShowFactory();
 
 const toClassString = (...xs: string[]) => xs.join(' ');
 
-function MinuteGraduations(props: IClockFaceProps) {
+function Graduations(props: IClockFaceProps) {
 
   var gradnsMinsData = [...Array(60)].map((_, i) => {
     const degrees = i / 60 * 360;
@@ -105,4 +105,4 @@ function MinuteGraduations(props: IClockFaceProps) {
   );
 }
 
-export default MinuteGraduations;
+export default Graduations;

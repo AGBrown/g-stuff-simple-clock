@@ -4,7 +4,7 @@ import type { IClockGradnsConfig, ITellsTime } from '../types/ClockFaceTypes';
 import type { IClockHandsConfig } from './Hands';
 import Hands from './Hands';
 import DateComplication from './DateComplication';
-import MinuteGraduations from './MinuteGraduations';
+import Graduations from './Graduations';
 
 type IClockFaceProps = ITellsTime & {
   handsConfig: IClockHandsConfig;
@@ -20,7 +20,7 @@ function ClockFace(props: IClockFaceProps) {
   return (
     <div className="clock">
       <div className={["clock-face", ...cnClockFace].join(' ')}>
-        <MinuteGraduations {...props} />
+        <Graduations {...props} />
 
         {showPastTo && (
           <>
