@@ -1,0 +1,15 @@
+.date-container {
+  height: 100%;
+  right: 15%;
+}
+
+.clock-label-container {
+  position: absolute;
+  display: flex;
+}
+
+.clock-label-container .label {
+  position: relative;
+  color: #ccc;
+  margin: auto;
+}

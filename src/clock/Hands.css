@@ -30,3 +30,12 @@
   background: var(--sec-color);
   display: none;
 }
+
+.center-peg {
+  padding: calc(var(--center-peg-radius));
+  background: white;
+  position: absolute;
+  top: calc(50% - var(--center-peg-radius));
+  left: calc(50% - var(--center-peg-radius));
+  border-radius: 50%;
+}

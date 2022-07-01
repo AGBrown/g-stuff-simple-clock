@@ -42,70 +42,7 @@ body {
   color:#999;
 }
 
-/*--- Clock Face ---*/
-
-.clock-width {
-  width: var(--clocksize);
-  height: 30px;
-  max-width: 90vw; /* makes layout responsive for mobile*/
-  border-radius: 50%;
-  margin: auto;
-  position: relative;
-}
-.clock {
-  width: var(--clocksize);
-  height: var(--clocksize);
-  max-width: 90vw; /* makes layout responsive for mobile*/
-  max-height: 90vw; /* makes layout responsive for mobile*/
-  border-radius: 50%;
-  margin: auto;
-  position: relative;
-  padding-top:4em;
-  padding-bottom:4em;
-}
-
-.clock-face {
-  width: 100%;
-  height: 100%;
-  position: relative;
-}
-
 /*--- Components ---*/
-
-.center-peg {
-  padding: calc(var(--center-peg-radius));
-  background: white;
-  position: absolute;
-  top: calc(50% - var(--center-peg-radius));
-  left: calc(50% - var(--center-peg-radius));
-  border-radius: 50%;
-}
-
-.clock-label-container {
-  position: absolute;
-  display: flex;
-}
-
-.past-container {
-  height: 75%;
-  right: 35%;
-}
-
-.to-container {
-  height: 75%;
-  left: 35%;
-}
-
-.date-container {
-  height: 100%;
-  right: 15%;
-}
-
-.clock-label-container .label {
-  position: relative;
-  color: #ccc;
-  margin: auto;
-}
 
 .digital-time {
   position: absolute;
@@ -121,9 +58,4 @@ body {
 
 .button-container {
   z-index: 1000;
-}
-
-.past-to-bg {
-  border-radius: 50%;
-  background: linear-gradient(.25turn, #00695C 49.5%, #C51162 49.5%) no-repeat;
 }

@@ -1,5 +1,5 @@
 import React from 'react';
-import './Hands.css';
+import './DateComplication.css';
 import { ITellsTime } from '../types/ClockFaceTypes';
 
 function DateComplication(props: ITellsTime) {

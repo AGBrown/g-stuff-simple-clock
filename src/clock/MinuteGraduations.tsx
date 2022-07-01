@@ -1,5 +1,5 @@
 import React from 'react';
-import './ClockFace.css';
+import './MinuteGraduations.css';
 import type { IClockGradnsConfig, ITellsTime } from '../types/ClockFaceTypes';
 import type { IClockHandsConfig } from './Hands';
 
