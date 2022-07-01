@@ -46,11 +46,11 @@ const shouldShow = shouldShowFactory();
 const getGradnsData = (props: IClockFaceProps) =>
   [...Array(60)].map((_, i) => {
     const degrees = i / 60 * 360;
-    const transformStyles = !props.expandGradns ? {} : {
-      transform: `rotate(${degrees}deg)`
+    const transformStyles = {
+      transform: props.expandGradns ? `rotate(${degrees}deg)` : undefined
     };
-    const labelTransformStyles = !props.expandGradns ? {} : {
-      transform: `rotate(-${degrees}deg)`
+    const labelTransformStyles = {
+      transform: props.expandGradns ? `rotate(-${degrees}deg)` : undefined
     };
     const gradnClassNamesMin = !shouldShow.gradns.min(i, props) ? ["gradn-hide"] : [];
     const gradnClassNamesHrs = shouldShow.gradns.hour(i, props) ? ["gradn-hour"] : [];
