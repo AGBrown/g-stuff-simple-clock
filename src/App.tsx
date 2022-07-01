@@ -2,7 +2,9 @@ import React, { useEffect, useState } from 'react';
 import './App.css';
 import ButtonsIncrements from './options/ButtonsIncrements';
 import ClockFace from './clock/ClockFace';
-import { IClockHandsConfig, IClockTicksConfig, mergeTicksConfig } from './types/ClockFaceTypes';
+import { IClockTicksConfig, mergeTicksConfig } from './types/ClockFaceTypes';
+import type { IClockHandsConfig } from './clock/Hands';
+import { mergeHandsRotateConfig } from './clock/Hands';
 
 const ticksConfigDefault = (): IClockTicksConfig => ({
   show: {
@@ -28,6 +30,10 @@ const handsConfigDefault = (): IClockHandsConfig => ({
   jump: {
     min: true,
     hour: false
+  },
+  rotate: {
+    isStarted: false,
+    isComplete: false
   }
 });
 
@@ -50,8 +56,6 @@ function App(props: { version: string }) {
   const [ver, setVer] = useState(props.version);
   const [date, setDate] = useState(new Date(Date.now()).valueOf());
   const [expandTicks, setExpandTicks] = useState(false);
-  const [rotateHands, setRotateHands] = useState(false);
-  const [handsRotated, setHandsRotated] = useState(false);
   const [handsConfig, setHandsConfig] = useState(handsConfigDefault());
   const [ticksConfig, setTicksConfig] = useState(ticksConfigDefault());
 
@@ -70,8 +74,6 @@ function App(props: { version: string }) {
     date,
     setDate,
     expandTicks,
-    rotateHands,
-    handsRotated,
     stateMutators: buttonMutators
   };
 
@@ -80,10 +82,10 @@ function App(props: { version: string }) {
       setExpandTicks(true);
     }, 300);
     setTimeout(() => {
-      setRotateHands(true);
+      setHandsConfig(c => mergeHandsRotateConfig(c, { isStarted: true }));
     }, 1000);
     setTimeout(() => {
-      setHandsRotated(true);
+      setHandsConfig(c => mergeHandsRotateConfig(c, { isComplete: true }));
       setTicksConfig(t => mergeTicksConfig(t, ticksConfigFinal().show))
     }, 3000);
   }, []);

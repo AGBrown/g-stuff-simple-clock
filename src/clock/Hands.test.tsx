@@ -1,15 +1,17 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import type { IClockHandsProps } from './Hands';
+import type { IClockHandsConfig, IClockHandsProps } from './Hands';
 import Hands from './Hands';
 
-const getHandsConfig = () => ({ jump: { min: true, hour: true } });
-
-const getHandsProps = (): IClockHandsProps => ( {
+const getHandsProps = (): IClockHandsProps => ({
   date: new Date(Date.now()).valueOf(),
-  handsConfig: getHandsConfig(),
-  rotateHands: false,
-  handsRotated: false
+  handsConfig: {
+    jump: { min: true, hour: true },
+    rotate: {
+      isStarted: false,
+      isComplete: false
+    }
+  },
 });
 
 test('renders hand faces', () => {

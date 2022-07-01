@@ -1,21 +1,19 @@
 import React from 'react';
 import './ClockFace.css';
-import { IClockHandsConfig, IClockTicksConfig } from '../types/ClockFaceTypes';
+import type { IClockTicksConfig, ITellsTime } from '../types/ClockFaceTypes';
+import type { IClockHandsConfig } from './Hands';
 import Hands from './Hands';
 
-type IClockFaceProps = {
+type IClockFaceProps = ITellsTime & {
   handsConfig: IClockHandsConfig;
   ticksConfig: IClockTicksConfig;
-  date: number,
   expandTicks: boolean
-  rotateHands: boolean,
-  handsRotated: boolean,
 }
 
 const shouldShowFactory = () => {
   const hour = (i: number, props: IClockFaceProps) => {
     return props.ticksConfig.show.hourTicks
-      && props.rotateHands
+      && props.handsConfig.rotate.isStarted
       && i % 5 === 0;
   }
   const hourLabels = (i: number, props: IClockFaceProps) => {

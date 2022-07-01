@@ -1,7 +1,8 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import ButtonsIncrements from './ButtonsIncrements';
-import { IClockHandsConfig, IClockTicksConfig } from '../types/ClockFaceTypes';
+import type { IClockTicksConfig } from '../types/ClockFaceTypes';
+import type { IClockHandsConfig } from '../clock/Hands'
 
 const getProps = () => ({
   date: new Date(Date.now()).valueOf(),
@@ -15,13 +16,17 @@ const getProps = () => ({
       hourLabel: false,
       hourTicks: false,
     }
-  },
+  } as IClockTicksConfig,
   handsConfig: {
     jump: {
       min: true,
       hour: false
+    },
+    rotate: {
+      isStarted: false,
+      isComplete: false
     }
-  },
+  } as IClockHandsConfig,
   stateMutators: {
     setTicksConfig: (ticksConfig: IClockTicksConfig) => {},
     setHandsConfig: (handsConfig: IClockHandsConfig) => {}

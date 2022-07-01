@@ -2,7 +2,14 @@ import React from 'react';
 import { render, screen } from '@testing-library/react';
 import ClockFace from './ClockFace';
 
-const getHandsConfig = () => ({ jump: { min: true, hour: true } });
+const getHandsConfig = () => ({
+  jump: { min: true, hour: true },
+  rotate: {
+    isStarted: false,
+    isComplete: false
+  }
+});
+
 const getTicksConfig = () => ({
   show: {
     min5Label: true,
@@ -19,8 +26,6 @@ const getClockProps = () => ( {
   ticksConfig: getTicksConfig(),
   date: new Date(Date.now()).valueOf(),
   expandTicks: false,
-  rotateHands: false,
-  handsRotated: false
 });
 
 test('renders minute marks', () => {

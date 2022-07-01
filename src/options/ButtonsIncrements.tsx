@@ -1,16 +1,16 @@
 import React from 'react';
 import moment from 'moment';
 import './ButtonsIncrements.css';
-import {
+import type {
   IClockTicksConfig,
-  IClockHandsConfig,
   IClockTicksShowConfig,
   IClockHandsJumpConfig,
 } from '../types/ClockFaceTypes';
 import {
-  mergeHandsConfig,
   mergeTicksConfig,
 } from '../types/ClockFaceTypes';
+import type { IClockHandsConfig } from '../clock/Hands'
+import { mergeHandsJumpConfig } from '../clock/Hands'
 import Icon from '@mdi/react';
 import { mdiPlus, mdiMinus, mdiAxisXRotateClockwise } from '@mdi/js';
 
@@ -61,7 +61,7 @@ function ButtonsIncrements(props: IButtonsIncrementsProps) {
     name: `${k}-jump`, label, id: `chkJump_${k}`,
     checked: props.handsConfig.jump[k],
     onChange: (x: boolean) => {
-      var newConfig = mergeHandsConfig(props.handsConfig, { [k]: x });
+      var newConfig = mergeHandsJumpConfig(props.handsConfig, { [k]: x } );
       props.stateMutators.setHandsConfig(newConfig);
     }
   });

@@ -2,26 +2,10 @@ export type ITellsTime = {
   date: number
 }
 
-export type IClockHandsConfig = {
-  jump: IClockHandsJumpConfig
-}
-
 export type IClockHandsJumpConfig = {
   min: boolean,
   hour: boolean
 }
-
-const mergeHandsConfig = (
-  config: IClockHandsConfig,
-  newConfig: Partial<IClockHandsJumpConfig>) => {
-  return {
-    ...config,
-    jump: {
-      ...config.jump,
-      ...newConfig
-    }
-  };
-};
 
 export type IClockTicksShowConfig = {
   min5Label: boolean,
@@ -50,6 +34,5 @@ const mergeTicksConfig = (
 };
 
 export {
-  mergeHandsConfig,
   mergeTicksConfig
 }
