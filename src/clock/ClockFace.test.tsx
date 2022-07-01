@@ -34,7 +34,7 @@ test('renders minute marks', () => {
   };
   render(<ClockFace {...props} />);
   [...Array(60)].forEach((_, x) => {
-    const es = screen.getAllByText((_, e) => new RegExp(`gradn-radius`).test(e?.getAttribute('class') ?? ""));
+    const es = screen.getAllByText((_, e) => new RegExp(`gradn-frame`).test(e?.getAttribute('class') ?? ""));
     expect(es[0]).toBeInTheDocument();
   });
 });

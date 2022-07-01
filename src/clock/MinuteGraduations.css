@@ -1,4 +1,4 @@
-.gradn-radius {
+.gradn-frame {
   width: var(--gradnwidth);
   height: var(--gradnheight);
   position: absolute;
@@ -9,7 +9,7 @@
   /*background-color: #DD8888;*/
 }
 
-.minutes .gradnmark {
+.graduations .gradnmark {
   width: var(--gradnmarkwidth);
   height: 8%;
   position: relative;

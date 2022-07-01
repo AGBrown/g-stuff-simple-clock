@@ -73,10 +73,10 @@ function MinuteGraduations(props: IClockFaceProps) {
   });
 
   return (
-    <div className="minutes">
+    <div className="graduations">
       {gradnsData.map(x =>
         <div key={`${x.i}`}
-              className={toClassString("gradn-radius", ...x.gradnClassNames)}
+              className={toClassString("gradn-frame", ...x.gradnClassNames)}
               style={{ ...x.transformStyles }}>
           <div className="gradnmark">
             { shouldShow.labels.min(x.i, props)
