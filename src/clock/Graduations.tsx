@@ -40,13 +40,18 @@ const shouldShowFactory = () => {
 };
 const shouldShow = shouldShowFactory();
 
-const getGradnsData = (props: IClockFaceProps, startOpening: boolean) =>
+const getGradnsData = (
+    props: IClockFaceProps,
+    startOpening: boolean,
+    onAnimationComplete: () => void
+  ) =>
   [...Array(60)].map((_, i) => {
     const degrees = i / 60 * 360;
     const transformStyles = {
       animate: { rotate: degrees },
       transition: { duration: 2 },
-      style: { originX: 0.5, originY: 1 }
+      style: { originX: 0.5, originY: 1 },
+      onAnimationComplete: i === 59 ? onAnimationComplete : undefined
     };
     const labelTransformStyles = {
       transform: startOpening ? `rotate(-${degrees}deg)` : undefined
@@ -85,13 +90,10 @@ const openingAnimationMachine =
         },
       },
       opening: {
-        invoke: {
-          src: "openGradns",
-          onDone: [
-            {
-              target: "open",
-            },
-          ],
+        on: {
+          DONE: {
+            target: "open",
+          }
         },
       },
       open: {
@@ -118,7 +120,8 @@ function Graduations(props: IClockFaceProps) {
   }, [expandGradns, openSend]);
 
   const startOpening = openState.matches('opening');
-  const gradnsData = getGradnsData(props, startOpening);
+  const onAnimationComplete = () => openSend('DONE');
+  const gradnsData = getGradnsData(props, startOpening, onAnimationComplete);
 
   return (
     <div className="graduations">
