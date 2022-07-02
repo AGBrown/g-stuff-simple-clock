@@ -1,5 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { motion } from "framer-motion"
+import { createMachine } from "xstate";
+import { useMachine } from "@xstate/react";
 
 import './Graduations.css';
 import type { IClockFaceProps } from '../types/ClockFaceTypes';
@@ -38,7 +40,7 @@ const shouldShowFactory = () => {
 };
 const shouldShow = shouldShowFactory();
 
-const getGradnsData = (props: IClockFaceProps) =>
+const getGradnsData = (props: IClockFaceProps, startOpening: boolean) =>
   [...Array(60)].map((_, i) => {
     const degrees = i / 60 * 360;
     const transformStyles = {
@@ -47,7 +49,7 @@ const getGradnsData = (props: IClockFaceProps) =>
       style: { originX: 0.5, originY: 1 }
     };
     const labelTransformStyles = {
-      transform: props.expandGradns ? `rotate(-${degrees}deg)` : undefined
+      transform: startOpening ? `rotate(-${degrees}deg)` : undefined
     };
     const gradnClassNamesMin = !shouldShow.gradns.min(i, props) ? ["gradn-hide"] : [];
     const gradnClassNamesHrs = shouldShow.gradns.hour(i, props) ? ["gradn-hour"] : [];
@@ -69,8 +71,54 @@ const getGradnsData = (props: IClockFaceProps) =>
 
 const toClassString = (...xs: string[]) => xs.join(' ');
 
+const openingAnimationMachine =
+/** @xstate-layout N4IgpgJg5mDOIC5QAoC2BDAxgCwJYDswBKAOkwBsB7WSAYgHkAFAUQDlFQAHa3AF10r4OIAB6IAtACYAbAEYSkgMyyA7AA4ALAAY1AVhUaNATgA0IAJ4TZqkvsm7dkldckbpOgL4ezaLHkKklJxg+ARQtBCCYCQEAG6UANbRvjgExCRBIWEIcZSY6PyCANpaALrC3LB8AkJIooi6RiSKitJGRm2qWrrSKrpmlgji1iq2KvaOzrKu7mpe3iD4lBBwwin+6RTUkBU8hbWgYkOKHSTSPWpaGrJGsmrS0m4DVkq2Rn3a9tc9t14+GKkAhlgqF8FBdlV9sIjsNHiQjIZJLdJPY1EoVM8hrJjCQ7jddCc1AYtM4-iB1mlAiCIdVBNDEK4mvcbkZJHpHBpnBpMcNXo0PlovrIfmSKQEaVC6jCNJItGcLlcbncHk8LBIUZJcX0HipHtjrLJ5h4gA */
+  createMachine({
+    id: "(machine)",
+    initial: "closed",
+    states: {
+      closed: {
+        on: {
+          OPEN: {
+            target: "opening",
+          },
+        },
+      },
+      opening: {
+        invoke: {
+          src: "openGradns",
+          onDone: [
+            {
+              target: "open",
+            },
+          ],
+        },
+      },
+      open: {
+        type: "final"
+      },
+    },
+  });
+
 function Graduations(props: IClockFaceProps) {
-  const gradnsData = getGradnsData(props);
+  const [openState, openSend, openService] = useMachine(openingAnimationMachine, { devTools: false });
+  const { setState, expandGradns } = props;
+
+  useEffect(() => {
+    const subscription = openService.subscribe((state) => {
+      console.log(state.value);
+      setState(state as unknown as string);
+    });
+
+    return subscription.unsubscribe;
+  }, [openService, setState]);
+
+  useEffect(() => {
+    if (expandGradns) openSend("OPEN");
+  }, [expandGradns, openSend]);
+
+  const startOpening = openState.matches('opening');
+  const gradnsData = getGradnsData(props, startOpening);
 
   return (
     <div className="graduations">

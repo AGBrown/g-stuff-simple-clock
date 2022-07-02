@@ -23,6 +23,7 @@ const getGradnsConfig = () => ({
 
 const getClockProps = () => ( {
   state: '',
+  setState: () => {},
   handsConfig: getHandsConfig(),
   gradnsConfig: getGradnsConfig(),
   date: new Date(Date.now()).valueOf(),

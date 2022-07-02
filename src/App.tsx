@@ -36,7 +36,7 @@ function App(props: { version: string }) {
   };
 
   const clockProps = {
-    state,
+    state, setState,
     handsConfig,
     gradnsConfig,
     date,
