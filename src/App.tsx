@@ -37,21 +37,6 @@ const handsConfigDefault = (): IClockHandsConfig => ({
   }
 });
 
-const getVersion = (setVersion: (ver: string) => void) => {
-  fetch('version.json', {
-    headers : {
-      'Content-Type': 'application/json',
-      'Accept': 'application/json'
-     }
-  })
-  .then(function(response){
-    return response.json();
-  })
-  .then(function(versionData){
-    setVersion(versionData.version);
-  });
-};
-
 function App(props: { version: string }) {
   const [ver, setVer] = useState(props.version);
   const [date, setDate] = useState(new Date(Date.now()).valueOf());
