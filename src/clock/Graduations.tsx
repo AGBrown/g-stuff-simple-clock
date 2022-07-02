@@ -1,6 +1,7 @@
 import React from 'react';
 import './Graduations.css';
-import type { IClockGradnsConfig, ITellsTime } from '../types/ClockFaceTypes';
+import type { ITellsTime } from '../types/ClockFaceTypes';
+import type { IClockGradnsConfig } from '../utils/Graduations';
 import type { IClockHandsConfig } from './Hands';
 
 type IClockFaceProps = ITellsTime & {

@@ -1,4 +1,4 @@
-import { Action } from "../types/ClockFaceTypes";
+import { Action } from "../types/common";
 
 const getVersion = async (setVersion: Action<string>) => {
   try {

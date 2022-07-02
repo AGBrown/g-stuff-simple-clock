@@ -2,30 +2,11 @@ import React, { useEffect, useState } from 'react';
 import './App.css';
 import ButtonsIncrements from './options/ButtonsIncrements';
 import ClockFace from './clock/ClockFace';
-import { IClockGradnsConfig, mergeGradnsConfig } from './types/ClockFaceTypes';
+import * as graduationsUtils from './utils/Graduations';
 import type { IClockHandsConfig } from './clock/Hands';
 import { mergeHandsRotateConfig } from './clock/Hands';
+import { getVersion } from './utils/version';
 
-const gradnsConfigDefault = (): IClockGradnsConfig => ({
-  show: {
-    min5Label: false,
-    minLabel: false,
-    minGradns: true,
-    pastTo: false,
-    hourLabel: false,
-    hourGradns: true,
-  }
-});
-const gradnsConfigFinal = (): IClockGradnsConfig => ({
-  show: {
-    min5Label: false,
-    minLabel: false,
-    minGradns: true,
-    pastTo: false,
-    hourLabel: false,
-    hourGradns: true
-  }
-});
 const handsConfigDefault = (): IClockHandsConfig => ({
   jump: {
     min: true,
@@ -42,7 +23,7 @@ function App(props: { version: string }) {
   const [date, setDate] = useState(new Date(Date.now()).valueOf());
   const [expandGradns, setExpandGradns] = useState(false);
   const [handsConfig, setHandsConfig] = useState(handsConfigDefault());
-  const [gradnsConfig, setGradnsConfig] = useState(gradnsConfigDefault());
+  const [gradnsConfig, setGradnsConfig] = useState(graduationsUtils.factory.default());
 
   useEffect(()=>{
     getVersion(setVer);
@@ -71,7 +52,7 @@ function App(props: { version: string }) {
     }, 1000);
     setTimeout(() => {
       setHandsConfig(c => mergeHandsRotateConfig(c, { isComplete: true }));
-      setGradnsConfig(t => mergeGradnsConfig(t, gradnsConfigFinal().show))
+      setGradnsConfig(t => graduationsUtils.merge(t, graduationsUtils.factory.final().show))
     }, 3000);
   }, []);
 
