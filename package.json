@@ -6,6 +6,7 @@
   "dependencies": {
     "@mdi/js": "^6.7.96",
     "@mdi/react": "^1.6.0",
+    "@xstate/inspect": "^0.7.0",
     "@xstate/react": "^3.0.0",
     "framer-motion": "^6.3.16",
     "moment": "^2.29.3",
