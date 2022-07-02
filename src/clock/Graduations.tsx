@@ -1,4 +1,6 @@
 import React from 'react';
+import { motion } from "framer-motion"
+
 import './Graduations.css';
 import type { ITellsTime } from '../types/ClockFaceTypes';
 import type { IClockGradnsConfig } from '../utils/Graduations';
@@ -48,7 +50,9 @@ const getGradnsData = (props: IClockFaceProps) =>
   [...Array(60)].map((_, i) => {
     const degrees = i / 60 * 360;
     const transformStyles = {
-      transform: props.expandGradns ? `rotate(${degrees}deg)` : undefined
+      animate: { rotate: degrees },
+      transition: { duration: 2 },
+      style: { originX: 0.5, originY: 1 }
     };
     const labelTransformStyles = {
       transform: props.expandGradns ? `rotate(-${degrees}deg)` : undefined
@@ -79,9 +83,9 @@ function Graduations(props: IClockFaceProps) {
   return (
     <div className="graduations">
     {gradnsData.map(x =>
-      <div key={`${x.i}`}
+      <motion.div key={`${x.i}`}
             className={toClassString("gradn-frame", ...x.gradnClassNamesMin)}
-            style={{ ...x.transformStyles }}>
+            { ...x.transformStyles }>
         <div className="gradn">
           { shouldShow.labels.min(x.i, props)
               && <span className="gradn-label label-min"
@@ -89,12 +93,12 @@ function Graduations(props: IClockFaceProps) {
                   {x.labels.min}
                 </span> }
         </div>
-      </div>
+      </motion.div>
     )}
     {gradnsData.filter(x => x.isHr).map(x =>
-      <div key={`${x.i}`}
+      <motion.div key={`${x.i}`}
             className={toClassString("gradn-frame", ...x.gradnClassNamesHrs)}
-            style={{ ...x.transformStyles }}>
+            { ...x.transformStyles }>
         <div className="gradn">
           { shouldShow.labels.hour(x.i, props)
               && <span className="gradn-label label-hour"
@@ -102,7 +106,7 @@ function Graduations(props: IClockFaceProps) {
                   {x.labels.hr}
                 </span> }
         </div>
-      </div>
+      </motion.div>
     )}
     </div>
   );
