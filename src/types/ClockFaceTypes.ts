@@ -8,5 +8,6 @@ export type ITellsTime = {
 export type IClockFaceProps = ITellsTime & {
   handsConfig: IClockHandsConfig;
   gradnsConfig: IClockGradnsConfig;
-  expandGradns: boolean
+  expandGradns: boolean,
+  state: string
 }

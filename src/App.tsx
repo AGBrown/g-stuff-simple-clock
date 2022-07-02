@@ -19,6 +19,7 @@ const handsConfigDefault = (): IClockHandsConfig => ({
 });
 
 function App(props: { version: string }) {
+  const [state, setState] = useState('none');
   const [ver, setVer] = useState(props.version);
   const [date, setDate] = useState(new Date(Date.now()).valueOf());
   const [expandGradns, setExpandGradns] = useState(false);
@@ -35,6 +36,7 @@ function App(props: { version: string }) {
   };
 
   const clockProps = {
+    state,
     handsConfig,
     gradnsConfig,
     date,
