@@ -1,7 +1,7 @@
 import React from 'react';
 import moment from 'moment';
 import './ButtonsIncrements.css';
-import type { IClockHandsJumpConfig } from '../types/ClockFaceTypes';
+import type { IClockHandsJumpConfig } from '../clock/Hands';
 import type { IClockGradnsConfig, IClockGradnsShowConfig } from '../utils/Graduations';
 import * as graduationsUtils from '../utils/Graduations';
 import type { IClockHandsConfig } from '../clock/Hands'

@@ -1,17 +1,9 @@
 import React from 'react';
 import './ClockFace.css';
-import type { ITellsTime } from '../types/ClockFaceTypes';
-import type { IClockGradnsConfig } from '../utils/Graduations';
-import type { IClockHandsConfig } from './Hands';
+import type { IClockFaceProps } from '../types/ClockFaceTypes';
 import Hands from './Hands';
 import DateComplication from './DateComplication';
 import Graduations from './Graduations';
-
-type IClockFaceProps = ITellsTime & {
-  handsConfig: IClockHandsConfig;
-  gradnsConfig: IClockGradnsConfig;
-  expandGradns: boolean
-}
 
 function ClockFace(props: IClockFaceProps) {
 

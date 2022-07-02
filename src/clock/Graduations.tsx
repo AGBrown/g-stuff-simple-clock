@@ -2,15 +2,7 @@ import React from 'react';
 import { motion } from "framer-motion"
 
 import './Graduations.css';
-import type { ITellsTime } from '../types/ClockFaceTypes';
-import type { IClockGradnsConfig } from '../utils/Graduations';
-import type { IClockHandsConfig } from './Hands';
-
-type IClockFaceProps = ITellsTime & {
-  handsConfig: IClockHandsConfig;
-  gradnsConfig: IClockGradnsConfig;
-  expandGradns: boolean
-}
+import type { IClockFaceProps } from '../types/ClockFaceTypes';
 
 const shouldShowFactory = () => {
   const hour = (i: number, props: IClockFaceProps) => {
