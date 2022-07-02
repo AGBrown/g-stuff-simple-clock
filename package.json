@@ -6,12 +6,14 @@
   "dependencies": {
     "@mdi/js": "^6.7.96",
     "@mdi/react": "^1.6.0",
+    "@xstate/react": "^3.0.0",
     "framer-motion": "^6.3.16",
     "moment": "^2.29.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-scripts": "5.0.1",
-    "web-vitals": "^2.1.4"
+    "web-vitals": "^2.1.4",
+    "xstate": "^4.32.1"
   },
   "scripts": {
     "predeploy": "ls; $VER=\"$(git describe)\"; echo $VER; pushd public; ls; $fc=(gc version.json); echo $fc; $fc.Replace('version not-set', $VER) > version.json; popd; npm run build",
