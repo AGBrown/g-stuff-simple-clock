@@ -1,0 +1,41 @@
+.hand {
+  width: var(--handwidth);
+  height: var(--handheight);
+  background: #999;
+  border-radius: 3px;
+  position: absolute;
+  transform-origin: 50% 100%;
+  left: calc(50% - var(--handwidth)/2);
+  transition: all 0.05s;
+  transition-timing-function: cubic-bezier(0.1, 2.7, 0.58, 1);
+}
+
+.hour-hand {
+  height: var(--hourheight);
+  top: calc(50% - var(--hourheight));
+  background: var(--hrs-color);
+}
+
+.min-hand {
+  height: var(--minuteheight);
+  top: calc(50% - var(--minuteheight));
+  background: var(--min-color);
+}
+
+.second-hand {
+  height: var(--secondheight);
+  width: var(--secondwidth);
+  transform-origin: 50% 83.3333%;
+  left: calc(50% - (var(--secondwidth)/2));
+  background: var(--sec-color);
+  display: none;
+}
+
+.center-peg {
+  padding: calc(var(--center-peg-radius));
+  background: white;
+  position: absolute;
+  top: calc(50% - var(--center-peg-radius));
+  left: calc(50% - var(--center-peg-radius));
+  border-radius: 50%;
+}

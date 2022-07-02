@@ -2,25 +2,30 @@ import React from 'react';
 import { render, screen } from '@testing-library/react';
 import ClockFace from './ClockFace';
 
-const getHandsConfig = () => ({ jump: { min: true, hour: true } });
-const getTicksConfig = () => ({
+const getHandsConfig = () => ({
+  jump: { min: true, hour: true },
+  rotate: {
+    isStarted: false,
+    isComplete: false
+  }
+});
+
+const getGradnsConfig = () => ({
   show: {
     min5Label: true,
     minLabel: true,
-    minTicks: true,
+    minGradns: true,
     pastTo: false,
     hourLabel: true,
-    hourTicks: true
+    hourGradns: true
   }
 });
 
 const getClockProps = () => ( {
   handsConfig: getHandsConfig(),
-  ticksConfig: getTicksConfig(),
+  gradnsConfig: getGradnsConfig(),
   date: new Date(Date.now()).valueOf(),
-  expandTicks: false,
-  rotateHands: false,
-  handsRotated: false
+  expandGradns: false,
 });
 
 test('renders minute marks', () => {
@@ -29,8 +34,8 @@ test('renders minute marks', () => {
   };
   render(<ClockFace {...props} />);
   [...Array(60)].forEach((_, x) => {
-    const e = screen.getByText((_, e) => e?.getAttribute('data-minute') === `${x}`);
-    expect(e).toBeInTheDocument();
+    const es = screen.getAllByText((_, e) => new RegExp(`gradn-frame`).test(e?.getAttribute('class') ?? ""));
+    expect(es[0]).toBeInTheDocument();
   });
 });
 

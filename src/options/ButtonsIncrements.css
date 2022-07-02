@@ -6,3 +6,11 @@
 svc.btn {
   width: 1.5rem;
 }
+
+.chkLabel {
+  color: #ccc;
+}
+
+.button-container {
+  z-index: 1000;
+}

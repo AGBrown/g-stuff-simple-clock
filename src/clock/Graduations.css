@@ -1,0 +1,50 @@
+.gradn-frame {
+  width: var(--gradnframewidth);
+  height: var(--gradnheight);
+  position: absolute;
+  left: calc(50% - var(--gradnframewidth) / 2);
+  bottom: 50%;
+  transform-origin: 50% 100%;
+  transition: all 2s;
+  /*background-color: #DD8888;*/
+}
+
+.graduations .gradn {
+  width: var(--gradnwidth);
+  height: 8%;
+  position: relative;
+  background-color: #555;
+  margin: auto;
+}
+
+.gradn-hour .gradn {
+  width: calc(var(--gradnwidth) * var(--boldwidth));
+  background-color: #fff;
+}
+
+.gradn-hide .gradn {
+  display: none;
+}
+
+.gradn-label {
+  color: #aaa;
+}
+.gradn-label.label-min {
+  position:absolute;
+  top:50%;
+  margin-top:-50px;
+  margin-left:-0.25em;
+  transform: rotate(90deg);
+  text-align: center;
+}
+.gradn-label.label-hour {
+  color: #eee;
+  position:absolute;
+  top:50%;
+  right:50%;
+  margin-top:30px;
+  margin-right:-0.35em;
+  transform: rotate(90deg);
+  text-align: center;
+  font-size: xx-large;
+}
