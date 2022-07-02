@@ -1,6 +1,7 @@
 import React from 'react';
 import './ClockFace.css';
-import type { IClockGradnsConfig, ITellsTime } from '../types/ClockFaceTypes';
+import type { ITellsTime } from '../types/ClockFaceTypes';
+import type { IClockGradnsConfig } from '../utils/Graduations';
 import type { IClockHandsConfig } from './Hands';
 import Hands from './Hands';
 import DateComplication from './DateComplication';

@@ -1,14 +1,9 @@
 import React from 'react';
 import moment from 'moment';
 import './ButtonsIncrements.css';
-import type {
-  IClockGradnsConfig,
-  IClockGradnsShowConfig,
-  IClockHandsJumpConfig,
-} from '../types/ClockFaceTypes';
-import {
-  mergeGradnsConfig,
-} from '../types/ClockFaceTypes';
+import type { IClockHandsJumpConfig } from '../types/ClockFaceTypes';
+import type { IClockGradnsConfig, IClockGradnsShowConfig } from '../utils/Graduations';
+import * as graduationsUtils from '../utils/Graduations';
 import type { IClockHandsConfig } from '../clock/Hands'
 import { mergeHandsJumpConfig } from '../clock/Hands'
 import Icon from '@mdi/react';
@@ -69,7 +64,7 @@ function ButtonsIncrements(props: IButtonsIncrementsProps) {
     name: k, label, id: `chkShow_${k}`,
     checked: props.gradnsConfig.show[k],
     onChange: (x: boolean) => {
-      var newConfig = mergeGradnsConfig(props.gradnsConfig, { [k]: x });
+      var newConfig = graduationsUtils.merge(props.gradnsConfig, { [k]: x });
       props.stateMutators.setGradnsConfig(newConfig);
     }
   });

@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import ButtonsIncrements from './ButtonsIncrements';
-import type { IClockGradnsConfig } from '../types/ClockFaceTypes';
+import type { IClockGradnsConfig } from '../utils/Graduations';
 import type { IClockHandsConfig } from '../clock/Hands'
 
 const getProps = () => ({
