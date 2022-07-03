@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { motion } from "framer-motion"
+import { motion, useMotionValue } from "framer-motion"
 import { createMachine } from "xstate";
 import { useMachine } from "@xstate/react";
 
@@ -137,6 +137,7 @@ function Graduations(props: IClockFaceProps) {
     openState.matches(OpeningAnimationMachineStates.opening),
     () => openSend(OpeningAnimationMachineEvents.DONE)
   );
+  const y = useMotionValue(0);
 
   return (
     <div className="graduations">
@@ -165,6 +166,7 @@ function Graduations(props: IClockFaceProps) {
             right: 0,
             bottom: 20,
           }}
+          style={{ y }}
           >
           { shouldShow.labels.hour(x.i, props)
               && <motion.span className="gradn-label label-hour"
@@ -179,3 +181,4 @@ function Graduations(props: IClockFaceProps) {
 }
 
 export default Graduations;
+
