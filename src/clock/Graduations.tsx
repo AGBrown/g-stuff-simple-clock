@@ -54,7 +54,9 @@ const getGradnsData = (
       onAnimationComplete: i === 59 ? onAnimationComplete : undefined
     };
     const labelTransformStyles = {
-      transform: startOpening ? `rotate(-${degrees}deg)` : undefined
+      animate: { rotate: -1 * degrees },
+      transition: { duration: 0 },
+      style: { originX: 0.5, originY: 0.5 },
     };
     const gradnClassNamesMin = !shouldShow.gradns.min(i, props) ? ["gradn-hide"] : [];
     const gradnClassNamesHrs = shouldShow.gradns.hour(i, props) ? ["gradn-hour"] : [];
@@ -145,10 +147,10 @@ function Graduations(props: IClockFaceProps) {
             { ...x.transformStyles }>
         <div className="gradn">
           { shouldShow.labels.min(x.i, props)
-              && <span className="gradn-label label-min"
-                  style={{ ...x.labelTransformStyles }}>
+              && <motion.span className="gradn-label label-min"
+                  { ...x.labelTransformStyles }>
                   {x.labels.min}
-                </span> }
+                </motion.span> }
         </div>
       </motion.div>
     )}
@@ -166,10 +168,10 @@ function Graduations(props: IClockFaceProps) {
           }}
           >
           { shouldShow.labels.hour(x.i, props)
-              && <span className="gradn-label label-hour"
-                  style={{ ...x.labelTransformStyles }}>
+              && <motion.span className="gradn-label label-hour"
+                  { ...x.labelTransformStyles }>
                   {x.labels.hr}
-                </span> }
+                </motion.span> }
         </motion.div>
       </motion.div>
     )}
