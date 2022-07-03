@@ -76,27 +76,38 @@ const getGradnsData = (
 
 const toClassString = (...xs: string[]) => xs.join(' ');
 
+enum OpeningAnimationMachineStates {
+  closed = "closed",
+  opening = "opening",
+  open = "open"
+}
+
+enum OpeningAnimationMachineEvents {
+  OPEN = "OPEN",
+  DONE = "DONE",
+}
+
 const openingAnimationMachine =
 /** @xstate-layout N4IgpgJg5mDOIC5QAoC2BDAxgCwJYDswBKAOkwBsB7WSAYgHkAFAUQDlFQAHa3AF10r4OIAB6IAtACYAbAEYSkgMyyA7AA4ALAAY1AVhUaNATgA0IAJ4TZqkvsm7dkldckbpOgL4ezaLHkKklJxg+ARQtBCCYCQEAG6UANbRvjgExCRBIWEIcZSY6PyCANpaALrC3LB8AkJIooi6RiSKitJGRm2qWrrSKrpmlgji1iq2KvaOzrKu7mpe3iD4lBBwwin+6RTUkBU8hbWgYkOKHSTSPWpaGrJGsmrS0m4DVkq2Rn3a9tc9t14+GKkAhlgqF8FBdlV9sIjsNHiQjIZJLdJPY1EoVM8hrJjCQ7jddCc1AYtM4-iB1mlAiCIdVBNDEK4mvcbkZJHpHBpnBpMcNXo0PlovrIfmSKQEaVC6jCNJItGcLlcbncHk8LBIUZJcX0HipHtjrLJ5h4gA */
   createMachine({
     id: "(machine)",
-    initial: "closed",
+    initial: OpeningAnimationMachineStates.closed,
     states: {
-      closed: {
+      [OpeningAnimationMachineStates.closed]: {
         on: {
-          OPEN: {
-            target: "opening",
+          [OpeningAnimationMachineEvents.OPEN]: {
+            target: OpeningAnimationMachineStates.opening,
           },
         },
       },
-      opening: {
+      [OpeningAnimationMachineStates.opening]: {
         on: {
-          DONE: {
-            target: "open",
+          [OpeningAnimationMachineEvents.DONE]: {
+            target: OpeningAnimationMachineStates.open,
           }
         },
       },
-      open: {
+      [OpeningAnimationMachineStates.open]: {
         type: "final"
       },
     },
@@ -108,6 +119,7 @@ function Graduations(props: IClockFaceProps) {
 
   useEffect(() => {
     const subscription = openService.subscribe((state) => {
+      // TODO: if state matches 'open' then enable buttons, use the state prop for that.
       console.log(state.value);
       setState(state as unknown as string);
     });
@@ -116,13 +128,12 @@ function Graduations(props: IClockFaceProps) {
   }, [openService, setState]);
 
   useEffect(() => {
-    if (expandGradns) openSend("OPEN");
+    if (expandGradns) openSend(OpeningAnimationMachineEvents.OPEN);
   }, [expandGradns, openSend]);
 
-  const startOpening = openState.matches('opening');
-  const onAnimationComplete = () => openSend('DONE');
+  const startOpening = openState.matches(OpeningAnimationMachineStates.opening);
+  const onAnimationComplete = () => openSend(OpeningAnimationMachineEvents.DONE);
   const gradnsData = getGradnsData(props, startOpening, onAnimationComplete);
-
   return (
     <div className="graduations">
     {gradnsData.map(x =>
