@@ -131,9 +131,12 @@ function Graduations(props: IClockFaceProps) {
     if (expandGradns) openSend(OpeningAnimationMachineEvents.OPEN);
   }, [expandGradns, openSend]);
 
-  const startOpening = openState.matches(OpeningAnimationMachineStates.opening);
-  const onAnimationComplete = () => openSend(OpeningAnimationMachineEvents.DONE);
-  const gradnsData = getGradnsData(props, startOpening, onAnimationComplete);
+  const gradnsData = getGradnsData(
+    props,
+    openState.matches(OpeningAnimationMachineStates.opening),
+    () => openSend(OpeningAnimationMachineEvents.DONE)
+  );
+
   return (
     <div className="graduations">
     {gradnsData.map(x =>
