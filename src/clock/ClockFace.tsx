@@ -3,7 +3,7 @@ import './ClockFace.css';
 import type { IClockFaceProps } from '../types/ClockFaceTypes';
 import Hands from './Hands';
 import DateComplication from './DateComplication';
-import Graduations from './Graduations';
+import Graduations, { pickGraduationsProps } from './Graduations';
 
 function ClockFace(props: IClockFaceProps) {
 
@@ -13,7 +13,7 @@ function ClockFace(props: IClockFaceProps) {
   return (
     <div className="clock">
       <div className={["clock-face", ...cnClockFace].join(' ')}>
-        <Graduations {...props} />
+        <Graduations {...pickGraduationsProps(props)} />
 
         {showPastTo && (
           <>

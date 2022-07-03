@@ -5,25 +5,26 @@ import { useMachine } from "@xstate/react";
 
 import './Graduations.css';
 import type { IClockFaceProps } from '../types/ClockFaceTypes';
+import type { Action } from '../types/common';
+import { IClockGradnsConfig, IClockGradnsShowConfig } from '../utils/Graduations';
 
 const shouldShowFactory = () => {
-  const hour = (i: number, props: IClockFaceProps) => {
-    return props.gradnsConfig.show.hourGradns
-      && props.handsConfig.rotate.isStarted
+  const hour = (i: number, show: IClockGradnsShowConfig, showHrsAfterOpen: boolean) => {
+    return show.hourGradns && showHrsAfterOpen
       && i % 5 === 0;
   }
-  const hourLabels = (i: number, props: IClockFaceProps) => {
-    return props.gradnsConfig.show.hourGradns
-      && props.gradnsConfig.show.hourLabel
+  const hourLabels = (i: number, show: IClockGradnsShowConfig) => {
+    return show.hourGradns
+      && show.hourLabel
       && i % 5 === 0;
   }
-  const min = (i: number, props: IClockFaceProps) => {
-    return props.gradnsConfig.show.minGradns;
+  const min = (i: number, show: IClockGradnsShowConfig) => {
+    return show.minGradns;
   }
-  const minLabels = (i: number, props: IClockFaceProps) => {
-    return (props.gradnsConfig.show.minLabel
-        || (props.gradnsConfig.show.min5Label && i % 5 === 0))
-      && props.gradnsConfig.show.minGradns;
+  const minLabels = (i: number, show: IClockGradnsShowConfig) => {
+    return (show.minLabel
+        || (show.min5Label && i % 5 === 0))
+      && show.minGradns;
   }
 
   return {
@@ -40,7 +41,7 @@ const shouldShowFactory = () => {
 const shouldShow = shouldShowFactory();
 
 const getGradnsData = (
-    props: IClockFaceProps,
+    props: IGraduationsProps,
     startOpening: boolean,
     onAnimationComplete: () => void
   ) =>
@@ -57,8 +58,10 @@ const getGradnsData = (
       transition: { duration: 0 },
       style: { originX: 0.5, originY: 0.5 },
     };
-    const gradnClassNamesMin = shouldShow.gradns.min(i, props) ? ["gradn-min"] : ["gradn-hide"];
-    const gradnClassNamesHrs = shouldShow.gradns.hour(i, props) ? ["gradn-hour"] : ["gradn-hide"];
+    const gradnClassNamesMin = shouldShow.gradns.min(i, props.gradnsConfig.show) ?
+      ["gradn-min"] : ["gradn-hide"];
+    const gradnClassNamesHrs = shouldShow.gradns.hour(i, props.gradnsConfig.show, props.showHrsAfterOpen) ?
+      ["gradn-hour"] : ["gradn-hide"];
     const isHr = i % 5 === 0;
     const hrLabel = isHr ? (i === 0 ? 12 : i / 5) : "";
     return {
@@ -114,7 +117,33 @@ const openingAnimationMachine =
     },
   });
 
-function Graduations(props: IClockFaceProps) {
+type IGraduationsProps = {
+  setState: Action<string>,
+  expandGradns: boolean,
+  showHrsAfterOpen: boolean,
+  gradnsConfig: IClockGradnsConfig
+};
+
+const pickGraduationsProps = (props: IClockFaceProps): IGraduationsProps => {
+  const {
+    setState,
+    expandGradns,
+    gradnsConfig,
+    handsConfig
+  } = props;
+  return {
+    setState,
+    expandGradns,
+    gradnsConfig,
+    showHrsAfterOpen: handsConfig.rotate.isStarted
+  }
+}
+
+export {
+  pickGraduationsProps
+}
+
+function Graduations(props: IGraduationsProps) {
   const [openState, openSend, openService] = useMachine(openingAnimationMachine, { devTools: false });
   const { setState, expandGradns } = props;
 
@@ -146,7 +175,7 @@ function Graduations(props: IClockFaceProps) {
             className={toClassString("gradn-frame", ...x.gradnClassNamesMin)}
             { ...x.transformStyles }>
         <div className="gradn">
-          { shouldShow.labels.min(x.i, props)
+          { shouldShow.labels.min(x.i, props.gradnsConfig.show)
               && <motion.span className="gradn-label label-min"
                   { ...x.labelTransformStyles }>
                   {x.labels.min}
@@ -168,7 +197,7 @@ function Graduations(props: IClockFaceProps) {
           }}
           style={{ y }}
           >
-          { shouldShow.labels.hour(x.i, props)
+          { shouldShow.labels.hour(x.i, props.gradnsConfig.show)
               && <motion.span className="gradn-label label-hour"
                   { ...x.labelTransformStyles }>
                   {x.labels.hr}
