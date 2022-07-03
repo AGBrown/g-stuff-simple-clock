@@ -66,7 +66,7 @@ const getGradnsData = (
     const hrLabel = isHr ? (i === 0 ? 12 : i / 5) : "";
     return {
       i,
-      transformStyles,
+      transformStyles: startOpening ? transformStyles : undefined,
       gradnClassNamesMin,
       gradnClassNamesHrs,
       labelTransformStyles,
@@ -163,7 +163,7 @@ function Graduations(props: IGraduationsProps) {
 
   const gradnsData = getGradnsData(
     props,
-    openState.matches(OpeningAnimationMachineStates.opening),
+    !openState.matches(OpeningAnimationMachineStates.closed),
     () => openSend(OpeningAnimationMachineEvents.DONE)
   );
   const y = useMotionValue(0);
