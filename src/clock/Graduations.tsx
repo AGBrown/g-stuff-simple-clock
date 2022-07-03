@@ -158,12 +158,12 @@ function Graduations(props: IClockFaceProps) {
             className={toClassString("gradn-frame", ...x.gradnClassNamesHrs)}
             { ...x.transformStyles }>
         <motion.div className="gradn"
-          drag="y"
+          drag
           dragConstraints={{
             top: 0,
             left: 0,
             right: 0,
-            bottom: 0,
+            bottom: 20,
           }}
           >
           { shouldShow.labels.hour(x.i, props)
