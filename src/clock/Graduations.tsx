@@ -18,8 +18,7 @@ const shouldShowFactory = () => {
       && i % 5 === 0;
   }
   const min = (i: number, props: IClockFaceProps) => {
-    return props.gradnsConfig.show.minGradns
-      || (hour(i, props));
+    return props.gradnsConfig.show.minGradns;
   }
   const minLabels = (i: number, props: IClockFaceProps) => {
     return (props.gradnsConfig.show.minLabel
@@ -58,8 +57,8 @@ const getGradnsData = (
       transition: { duration: 0 },
       style: { originX: 0.5, originY: 0.5 },
     };
-    const gradnClassNamesMin = !shouldShow.gradns.min(i, props) ? ["gradn-hide"] : [];
-    const gradnClassNamesHrs = shouldShow.gradns.hour(i, props) ? ["gradn-hour"] : [];
+    const gradnClassNamesMin = shouldShow.gradns.min(i, props) ? ["gradn-min"] : ["gradn-hide"];
+    const gradnClassNamesHrs = shouldShow.gradns.hour(i, props) ? ["gradn-hour"] : ["gradn-hide"];
     const isHr = i % 5 === 0;
     const hrLabel = isHr ? (i === 0 ? 12 : i / 5) : "";
     return {
